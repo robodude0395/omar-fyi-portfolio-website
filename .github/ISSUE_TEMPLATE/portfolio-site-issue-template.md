@@ -8,14 +8,6 @@ assignees: ''
 
 ---
 
----
-name: 🚀 Feature Note
-about: Track a new feature, idea, or improvement
-title: "[FEATURE] "
-labels: enhancement
-assignees: ''
----
-
 ## 🧠 Summary
 Short description of the feature.
 
@@ -36,35 +28,6 @@ What problem does it solve?
 - [ ] Accessibility improvements
 - [ ] Refactor only
 - [ ] Research needed
-
----
-
-## 🛠 Proposed Implementation
-How might you build this?
-Outline rough technical approach.
-
----
-
-## 📸 References / Inspiration
-Links, screenshots, examples.
-
----
-
-## 🚦 Priority
-- [ ] Low
-- [ ] Medium
-- [ ] High
-- [ ] Critical
-
----
-
-## 📅 Status
-- [ ] Not started
-- [ ] In progress
-- [ ] Blocked
-- [ ] Completed
-
----
 
 ## 📝 Notes
 Extra thoughts, edge cases, reminders.

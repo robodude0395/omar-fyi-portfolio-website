@@ -1,0 +1,9 @@
+domain_name = "omar.fyi"
+environment = "prod"
+aws_region  = "eu-west-2"
+
+tags = {
+  Project     = "portfolio"
+  ManagedBy   = "terraform"
+  Environment = "prod"
+}

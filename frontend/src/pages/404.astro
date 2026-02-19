@@ -1,0 +1,58 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="404 — Page Not Found">
+  <section class="not-found">
+    <p class="error-code">404</p>
+    <h1>Page not found</h1>
+    <p class="message">
+      The page you're looking for doesn't exist, was moved, or never existed in
+      the first place. These things happen.
+    </p>
+    <a href="/" class="home-link">&larr; Go home</a>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    text-align: center;
+    padding: 6rem 0;
+  }
+
+  .error-code {
+    font-family: var(--font-mono);
+    font-size: 5rem;
+    font-weight: 700;
+    color: var(--color-border);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .not-found h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .message {
+    color: var(--color-text-muted);
+    max-width: 400px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+  }
+
+  .home-link {
+    font-family: var(--font-mono);
+    font-size: 0.9375rem;
+    color: var(--color-accent);
+    padding: 0.625rem 1.25rem;
+    border: 1px solid var(--color-accent);
+    border-radius: 6px;
+    transition: all var(--transition);
+  }
+
+  .home-link:hover {
+    background: var(--color-accent);
+    color: #fff;
+  }
+</style>

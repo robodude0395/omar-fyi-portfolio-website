@@ -1,0 +1,89 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="About — Omar Maaouane" description="A bit about Omar Maaouane — software engineer based in London.">
+  <section class="about">
+    <h1>About</h1>
+
+    <div class="about-content">
+      <p>
+        I'm Omar Maaouane, a software engineer based in London, UK. I work across the
+        stack but gravitate towards backend systems, infrastructure, and developer
+        tooling — the kind of work where you're building the platform that other
+        people build on.
+      </p>
+
+      <p>
+        I care about writing clean, maintainable code and building systems that are
+        simple enough to reason about at 3am when something breaks. I believe the
+        best infrastructure is the kind you forget exists because it just works.
+      </p>
+
+      <h2>What I work with</h2>
+
+      <p>
+        My day-to-day involves a mix of languages and tools, but the constants are:
+      </p>
+
+      <ul>
+        <li><strong>Cloud &amp; Infrastructure</strong> — AWS, Terraform, Docker, CI/CD pipelines</li>
+        <li><strong>Backend</strong> — APIs, microservices, distributed systems</li>
+        <li><strong>Frontend</strong> — when needed, with a preference for minimal tooling</li>
+        <li><strong>Automation</strong> — if I do something twice, the third time is a script</li>
+      </ul>
+
+      <h2>Beyond code</h2>
+
+      <p>
+        Outside of work, you'll find me exploring London, reading (mostly non-fiction
+        and sci-fi), tinkering with side projects, or trying to convince myself that
+        running in British weather builds character.
+      </p>
+
+      <h2>This site</h2>
+
+      <p>
+        Built with <a href="https://astro.build">Astro</a>, hosted on AWS (S3 +
+        CloudFront), infrastructure managed with Terraform, deployed via GitHub
+        Actions. It costs about £1-2 a month to run. You can read more about the
+        technical details in my
+        <a href="/blog/building-this-site/">post about building this site</a>.
+      </p>
+
+      <h2>Get in touch</h2>
+
+      <p>
+        The best way to reach me is via email or on GitHub. I'm always happy to chat
+        about interesting problems, potential collaborations, or just to say hello.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .about-content {
+    font-size: 1.0625rem;
+    line-height: 1.8;
+  }
+
+  .about-content h2 {
+    font-size: 1.25rem;
+    font-family: var(--font-mono);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .about-content ul {
+    margin-bottom: 1.5rem;
+  }
+
+  .about-content li {
+    margin-bottom: 0.625rem;
+  }
+</style>

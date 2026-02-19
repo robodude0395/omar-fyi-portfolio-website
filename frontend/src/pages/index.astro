@@ -10,15 +10,22 @@ const posts = (await getCollection("blog"))
 
 <BaseLayout title="Omar Maaouane — Software Engineer">
   <section class="hero">
-    <p class="greeting">Hey, I'm</p>
-    <h1>Omar Maaouane</h1>
-    <p class="tagline">
-      Software engineer based in London. I build things for the web, think about
-      infrastructure, and occasionally write about it.
-    </p>
-    <div class="hero-links">
-      <a href="/blog" class="hero-link primary">Read the blog &rarr;</a>
-      <a href="/about" class="hero-link secondary">More about me</a>
+    <div class="hero-content">
+      <div class="hero-text">
+        <p class="greeting">Hey, I'm</p>
+        <h1>Omar Maaouane</h1>
+        <p class="tagline">
+          Software engineer based in London. I build things for the web, think about
+          infrastructure, and occasionally write about it.
+        </p>
+        <div class="hero-links">
+          <a href="/blog" class="hero-link primary">Read the blog &rarr;</a>
+          <a href="/about" class="hero-link secondary">More about me</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <img src="/media/profile.jpg" alt="Omar Maaouane" width="280" height="280" />
+      </div>
     </div>
   </section>
 
@@ -54,6 +61,33 @@ const posts = (await getCollection("blog"))
   /* ── Hero ── */
   .hero {
     padding: 4rem 0 3rem;
+  }
+
+  .hero-content {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .hero-text {
+    flex: 1;
+  }
+
+  .hero-photo {
+    flex-shrink: 0;
+  }
+
+  .hero-photo img {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--color-border);
+    transition: border-color var(--transition);
+  }
+
+  .hero-photo img:hover {
+    border-color: var(--color-accent);
   }
 
   .greeting {
@@ -185,6 +219,28 @@ const posts = (await getCollection("blog"))
 
   .view-all:hover {
     color: var(--color-accent);
+  }
+
+  @media (max-width: 768px) {
+    .hero-content {
+      flex-direction: column-reverse;
+      text-align: center;
+      gap: 2rem;
+    }
+
+    .hero-photo img {
+      width: 200px;
+      height: 200px;
+    }
+
+    .hero-links {
+      justify-content: center;
+    }
+
+    .tagline {
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 
   @media (max-width: 640px) {

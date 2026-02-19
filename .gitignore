@@ -5,6 +5,9 @@ node_modules/
 dist/
 .astro/
 
+# Media assets (served from S3 in production, not committed to Git)
+frontend/public/media/
+
 # Environment
 *.env
 .env.*

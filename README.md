@@ -1,13 +1,30 @@
-# Omar Maaouane Veiga — Portfolio & Blog
+# Omar Maaouane — Portfolio & Blog
 
 A minimal, fast, and cost-effective personal website built with Astro and hosted on AWS.
 
-**Live:** [https://omar-fyi.com](https://omar-fyi.com)
-
 ## Architecture
-![Cloud Architecture](images/architecture_diagram.png)
 
-**Flow:** Users hit `omar-fyi.com` → Route 53 resolves to CloudFront → CloudFront runs a URL rewrite function (appends `index.html` to directory paths) → serves cached content from S3 with TLS via ACM. GitHub Actions builds and deploys on every push to `main`.
+```
+                    ┌─────────────┐
+                    │  Route 53   │
+                    │    (DNS)    │
+                    └──────┬──────┘
+                           │
+                           ▼
+┌──────────┐     ┌─────────────────┐     ┌─────────────┐
+│  ACM     │────▶│   CloudFront    │────▶│     S3      │
+│ (TLS)   │     │  (CDN + HTTPS)  │     │  (Storage)  │
+└──────────┘     └─────────────────┘     └─────────────┘
+                         ▲                       ▲
+                         │                       │
+                    ┌────┴────┐            ┌─────┴─────┐
+                    │  Users  │            │  GitHub   │
+                    │ (HTTPS) │            │  Actions  │
+                    └─────────┘            │ (CI/CD)   │
+                                           └───────────┘
+```
+
+**Flow:** Users hit the custom domain → Route 53 resolves to CloudFront → CloudFront serves cached content from S3 with TLS via ACM. GitHub Actions builds and deploys on every push to `main`.
 
 ## Tech Stack
 
@@ -19,14 +36,13 @@ A minimal, fast, and cost-effective personal website built with Astro and hosted
 | TLS            | AWS ACM (free, auto-renewing)           |
 | Infrastructure | Terraform                               |
 | CI/CD          | GitHub Actions                          |
-| Domain         | Cloudflare Registrar (~£10/year)        |
 
 ## Prerequisites
 
 - [Node.js](https://nodejs.org) >= 20
 - [Terraform](https://www.terraform.io/downloads) >= 1.5
 - [AWS CLI](https://aws.amazon.com/cli/) v2, configured with credentials
-- Domain name (registered via [Cloudflare Registrar](https://www.cloudflare.com/products/registrar/))
+- A registered domain name
 - A GitHub account
 
 ## Project Structure
@@ -57,7 +73,7 @@ portfolio_site/
 ├── terraform/                   # Infrastructure as Code
 │   ├── modules/
 │   │   ├── s3/                  # S3 bucket + policy
-│   │   ├── cloudfront/          # CDN distribution + OAC + URL rewrite function
+│   │   ├── cloudfront/          # CDN distribution + OAC
 │   │   ├── acm/                 # TLS certificate
 │   │   └── route53/             # DNS records
 │   ├── main.tf
@@ -71,12 +87,6 @@ portfolio_site/
 ├── .gitignore
 └── README.md
 ```
-
-## Domain Setup
-
-The domain `omar-fyi.com` is registered through **Cloudflare Registrar** (~£10/year). Cloudflare only handles registration — DNS is managed by AWS Route 53.
-
-**Setup:** After running `terraform apply`, copy the Route 53 nameservers from `terraform output name_servers` and set them as **custom nameservers** in Cloudflare Dashboard → Domain Registration → Manage Domain → Nameservers.
 
 ## Local Development
 
@@ -128,7 +138,7 @@ cp terraform.tfvars.example terraform.tfvars
 
 ### 2. Set Up Remote State (Optional but Recommended)
 
-Follow the instructions in `backend.tf` to create an S3 bucket for state management. Then uncomment the backend configuration and run:
+Follow the instructions in `backend.tf` to create an S3 bucket and DynamoDB table for state management. Then uncomment the backend configuration and run:
 
 ```bash
 terraform init -migrate-state
@@ -142,7 +152,7 @@ terraform plan     # Review what will be created
 terraform apply    # Create all resources
 ```
 
-### 4. Update Domain Nameservers
+### 4. Update Domain Registrar
 
 After `terraform apply`, note the name servers from the output:
 
@@ -150,7 +160,7 @@ After `terraform apply`, note the name servers from the output:
 terraform output name_servers
 ```
 
-In Cloudflare Dashboard: **Domain Registration → Manage Domain → Nameservers** → switch to custom nameservers and enter the 4 Route 53 nameservers. DNS propagation may take up to 48 hours (usually minutes).
+Update your domain registrar's nameservers to point to these Route 53 nameservers. DNS propagation may take up to 48 hours.
 
 ### 5. Configure GitHub Secrets
 
@@ -202,17 +212,21 @@ aws cloudfront create-invalidation \
 
 ## Cost Estimate
 
-| Service             | Cost                                              |
-|---------------------|---------------------------------------------------|
-| **Domain**          | ~£10/year (Cloudflare Registrar)                  |
-| **S3**              | ~$0.023/GB/month storage — a few MB, essentially free |
-| **CloudFront**      | 1 TB/month free for the first year, then ~$0.085/GB |
-| **Route 53**        | $0.50/hosted zone/month + $0.40/million queries   |
-| **ACM**             | Free (public certificates)                        |
-| **CloudFront Function** | Free (under 2 million invocations/month)      |
-| **Total**           | **~£10/year domain + ~$1–2/month AWS**            |
+This setup is designed to be extremely cost-effective for a personal site:
+
+| Service        | Cost                                              |
+|----------------|---------------------------------------------------|
+| **S3**         | ~$0.023/GB/month storage. A static site is a few MB — essentially free |
+| **CloudFront** | 1 TB/month free for the first year, then ~$0.085/GB. A personal blog won't come close |
+| **Route 53**   | $0.50/hosted zone/month + $0.40/million queries   |
+| **ACM**        | Free (public certificates)                        |
+| **Total**      | **~$1–2/month** after free tier                   |
+
+For a personal portfolio with modest traffic, expect to pay roughly the cost of a coffee per month.
 
 ## Security
+
+This setup follows AWS security best practices:
 
 - **No public S3 access** — bucket is fully private, content served only through CloudFront via Origin Access Control (OAC)
 - **HTTPS everywhere** — HTTP requests are automatically redirected to HTTPS
@@ -224,4 +238,4 @@ aws cloudfront create-invalidation \
 
 ## License
 
-Content is © Omar Maaouane Veiga. Code is available for reference.
+Content is © Omar Maaouane. Code is available for reference.

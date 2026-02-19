@@ -1,5 +1,5 @@
 variable "domain_name" {
-  description = "The domain name for the portfolio site (e.g. omar.fyi)"
+  description = "The domain name for the portfolio site (e.g. omar-fyi.com)"
   type        = string
 }
 

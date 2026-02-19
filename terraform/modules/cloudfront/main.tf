@@ -1,3 +1,31 @@
+# ── CloudFront Function — URL Rewrite ─────────────────────────────────────────
+# Rewrites directory requests (e.g. /blog/) to /blog/index.html
+# Also handles bare paths like /about → /about/index.html
+
+resource "aws_cloudfront_function" "url_rewrite" {
+  name    = "${replace(var.domain_name, ".", "-")}-url-rewrite"
+  runtime = "cloudfront-js-2.0"
+  comment = "Append index.html to directory and bare path requests"
+  publish = true
+  code    = <<-EOF
+    function handler(event) {
+      var request = event.request;
+      var uri = request.uri;
+
+      // If URI ends with '/', append index.html
+      if (uri.endsWith('/')) {
+        request.uri += 'index.html';
+      }
+      // If URI doesn't have a file extension, append /index.html
+      else if (!uri.includes('.')) {
+        request.uri += '/index.html';
+      }
+
+      return request;
+    }
+  EOF
+}
+
 # ── CloudFront Distribution ───────────────────────────────────────────────────
 
 # Origin Access Control — allows CloudFront to access private S3 bucket
@@ -32,6 +60,11 @@ resource "aws_cloudfront_distribution" "site" {
 
     # Use AWS managed CachingOptimized policy
     cache_policy_id = "658327ea-f89d-4fab-a63d-7e88639e58f6"
+
+    function_association {
+      event_type   = "viewer-request"
+      function_arn = aws_cloudfront_function.url_rewrite.arn
+    }
   }
 
   # SPA-style 404 handling — serve custom 404 page

@@ -24,7 +24,7 @@
 #
 # terraform {
 #   backend "s3" {
-#     bucket       = "omar-fyi-terraform-state"
+#     bucket       = "omar-fyi-com-terraform-state"
 #     key          = "portfolio/terraform.tfstate"
 #     region       = "eu-west-2"
 #     encrypt      = true

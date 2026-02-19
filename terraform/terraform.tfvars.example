@@ -1,4 +1,4 @@
-domain_name = "omar.fyi"
+domain_name = "omar-fyi.com"
 environment = "prod"
 aws_region  = "eu-west-2"
 

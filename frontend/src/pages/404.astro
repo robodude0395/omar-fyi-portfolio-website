@@ -5,9 +5,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 <BaseLayout title="404 — Page Not Found">
   <section class="not-found">
     <p class="error-code">404</p>
+    <div class="gif-container">
+      <img src="/media/404.gif" alt="404 Error" />
+    </div>
     <h1>Page not found</h1>
     <p class="message">
-      The page you're looking for doesn't exist, was moved, or never existed in
+      Ooops! The page you're looking for doesn't exist, was moved, or never existed in
       the first place. These things happen.
     </p>
     <a href="/" class="home-link">&larr; Go home</a>
@@ -18,6 +21,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   .not-found {
     text-align: center;
     padding: 6rem 0;
+  }
+
+  .gif-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
   }
 
   .error-code {

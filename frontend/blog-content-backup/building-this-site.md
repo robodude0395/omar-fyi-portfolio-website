@@ -34,7 +34,6 @@ const blog = defineCollection({
     title: z.string(),
     description: z.string(),
     pubDate: z.coerce.date(),
-    thumbnail: z.string().optional(), // listing page thumbnail
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
   }),

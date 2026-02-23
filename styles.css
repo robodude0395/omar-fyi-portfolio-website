@@ -1,0 +1,12 @@
+.blog-post-thumbnail {
+  max-width: 200px;
+  max-height: 150px;
+  object-fit: cover;
+  margin-right: 1rem;
+}
+
+.blog-post-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}

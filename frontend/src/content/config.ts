@@ -8,6 +8,16 @@ const blog = defineCollection({
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
     heroImage: z.string().optional(),
+    /**
+     * Thumbnail image displayed in the blog listing page.
+     * Should be a path relative to the `public/` directory (e.g. "/media/my-thumb.jpg").
+     * Recommended size: 200×200px or similar square/landscape ratio.
+     * If omitted, a default placeholder thumbnail is shown (src/assets/images/thumbnal-default.png).
+     *
+     * Example usage in frontmatter:
+     *   thumbnail: "/media/my-thumbnail.jpg"
+     */
+    thumbnail: z.string().optional(),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
   }),

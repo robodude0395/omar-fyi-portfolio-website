@@ -1,16 +1,17 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import defaultThumbnail from "../../assets/images/thumbnal-default.png";
 
 const posts = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
-<BaseLayout title="Blog — Omar Maaouane" description="Thoughts on engineering, infrastructure, and things I find interesting.">
+<BaseLayout title="Blog — Omar Maaouane Veiga" description="Post about what I've been getting up to.">
   <section class="blog-index">
     <h1>Blog</h1>
-    <p class="subtitle">Thoughts on engineering, infrastructure, and things I find interesting.</p>
+    <p class="subtitle">Post about what I've been getting up to.</p>
 
     <ul class="post-list">
       {posts.map((post) => {
@@ -19,23 +20,36 @@ const posts = (await getCollection("blog"))
           month: "short",
           day: "numeric",
         });
+        const thumbnailSrc = post.data.thumbnail || defaultThumbnail.src;
         return (
           <li class="post-item">
             <a href={`/blog/${post.slug}/`}>
-              <div class="post-info">
-                <time datetime={post.data.pubDate.toISOString()}>
-                  {formattedDate}
-                </time>
-                {post.data.tags.length > 0 && (
-                  <div class="post-tags">
-                    {post.data.tags.slice(0, 3).map((tag) => (
-                      <span class="tag">#{tag}</span>
-                    ))}
+              <div class="post-entry">
+                <img
+                  class="post-thumbnail"
+                  src={thumbnailSrc}
+                  alt={`Thumbnail for ${post.data.title}`}
+                  width="100"
+                  height="100"
+                  loading="lazy"
+                />
+                <div class="post-content">
+                  <div class="post-info">
+                    <time datetime={post.data.pubDate.toISOString()}>
+                      {formattedDate}
+                    </time>
+                    {post.data.tags.length > 0 && (
+                      <div class="post-tags">
+                        {post.data.tags.slice(0, 3).map((tag) => (
+                          <span class="tag">#{tag}</span>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                )}
+                  <h2>{post.data.title}</h2>
+                  <p>{post.data.description}</p>
+                </div>
               </div>
-              <h2>{post.data.title}</h2>
-              <p>{post.data.description}</p>
             </a>
           </li>
         );
@@ -90,6 +104,27 @@ const posts = (await getCollection("blog"))
     color: var(--color-accent);
   }
 
+  /* ── Thumbnail layout ── */
+  .post-entry {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .post-thumbnail {
+    width: 300px;
+    height: 300px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    object-fit: cover;
+    background-color: var(--color-border, #1a1a2e);
+  }
+
+  .post-content {
+    flex: 1;
+    min-width: 0; /* prevent text overflow */
+  }
+
   .post-info {
     display: flex;
     align-items: center;
@@ -132,5 +167,19 @@ const posts = (await getCollection("blog"))
   .empty {
     color: var(--color-text-muted);
     font-style: italic;
+  }
+
+  /* ── Responsive: stack thumbnail above text on small screens ── */
+  @media (max-width: 480px) {
+    .post-entry {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .post-thumbnail {
+      width: 100%;
+      height: 300px;
+      border-radius: 6px;
+    }
   }
 </style>

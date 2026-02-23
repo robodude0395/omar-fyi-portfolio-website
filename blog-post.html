@@ -1,0 +1,11 @@
+<!-- Single blog post template -->
+<div class="blog-post-content">
+  {% if post.thumbnail_image %}
+    <img src="{{ post.thumbnail_image }}" alt="{{ post.title }} Thumbnail" class="blog-post-thumbnail" width="200" height="150">
+  {% else %}
+    <img src="/media/default.jpg" alt="Default Thumbnail" class="blog-post-thumbnail" width="200" height="150">
+  {% endif %}
+  <h1>{{ post.title }}</h1>
+  <p>{{ post.description }}</p>
+  <!-- Post content -->
+</div>

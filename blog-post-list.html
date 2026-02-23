@@ -1,0 +1,13 @@
+<!-- Loop through blog posts -->
+{% for post in blog_posts %}
+  <div class="blog-post-item">
+    {% if post.thumbnail_image %}
+      <img src="{{ post.thumbnail_image }}" alt="{{ post.title }} Thumbnail" class="blog-post-thumbnail" loading="lazy" width="200" height="150">
+    {% else %}
+      <img src="/media/default.jpg" alt="Default Thumbnail" class="blog-post-thumbnail" loading="lazy" width="200" height="150">
+    {% endif %}
+    <h3>{{ post.title }}</h3>
+    <p>{{ post.description }}</p>
+    <!-- Other post details -->
+  </div>
+{% endfor %}

@@ -3,6 +3,7 @@ title: "Hello, World"
 description: "Welcome to my corner of the internet. A brief introduction to who I am and what you'll find here."
 pubDate: 2026-02-18
 tags: ["personal", "intro"]
+thumbnail: "/media/hehe.jpg"
 draft: false
 ---
 

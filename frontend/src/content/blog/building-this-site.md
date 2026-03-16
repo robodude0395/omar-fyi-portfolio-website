@@ -3,7 +3,7 @@ title: "Building This Site: Astro, AWS, and Terraform"
 description: "A deep dive into the tech stack behind this site — static generation with Astro, hosting on S3 and CloudFront, infrastructure as code with Terraform, and CI/CD with GitHub Actions."
 pubDate: 2026-02-18
 tags: ["astro", "aws", "terraform", "infrastructure", "devops"]
-thumbnail: "/media/huh.jpg"
+thumbnail: "/media/architecture_diagram.png"
 draft: false
 ---
 
@@ -18,6 +18,30 @@ I wanted something simple:
 3. **Automated** — push to `main`, site updates
 4. **Maintainable** — infrastructure as code, not click-ops
 5. **Mine** — custom domain, full control
+
+## The architecture
+For my portfolio website I wanted something that I had 101% control over. Not only that I also wanted the website itself to be a technical showcase of all the fun cloud things I learned during my role at Sigma Labs where I learned all kinds of cloud technologies.
+
+![Cloud Architecture](/media/architecture_diagram.png)
+
+That's when I arrived at the current architecture you see above. In essence, my site is a github repository I keep updated with all my portfolio posts (yes even this one right here).
+
+Theres a lot of frameworks I used in order to make my life a little bit easier such as:
++ **Terraform**: Just in case the warehouse hosting my server burns to ash, I can set my whole website again using literally just one command 'terraform apply'.
+
++ **Github actions**: Because I'm too lazy to manually deploy the site every time I am missing a comma.
++ **Astro**: It's a pretty solid framework to make static html that's is lightweight enough to cheaply host on AWS.
+
++ **Openclaw**: This was an AI agent I deployed locally on my computer. It's solely responsible for creating the the bulk of the site. It was magical how well it worked and how much it taught me along the way 😁!
+
++ **Kiro**: This was another agentic coding tool I learned after OpenClaw. Both this and Openclaw will be covered in their own posts but essentially this is just another tool that helps me maintain the site and enhance my overall productivity 😁!
+
++ **Cloudfront static hosting + S3**: Because this is literally having a server host a few static files from a bucket where data storage is functionally free at this scale. Not just that the servers where the files are hosted are edge servers meant to deliver static html ASAP to your hungry eyes!
+
+And many more technologies that are explained in excruciating detail on my github repo and later on this post. Enjoy!
+
+
+This is the part where you STOP READING because I am about to ramble a whole book about the technologies used in this site. So unless you are a massive nerd and are not particularly pressed for time... I dunno go away.
 
 ## The stack
 
@@ -77,7 +101,7 @@ terraform/
 
 Want to tear it all down? `terraform destroy`. Want to see what would change? `terraform plan`. Want to recreate it identically in another account? `terraform apply`.
 
-Infrastructure as code is one of those things that feels like overhead at first and then saves you the moment something goes wrong.
+Terraform is one of those tools that feels slow at first but later down the line you simply cannot do without because of how many headaches it'll save you.
 
 ### GitHub Actions for CI/CD
 

@@ -6,6 +6,31 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section class="about">
     <h1>About</h1>
 
+    <!-- ── Hero gallery ── -->
+    <div class="gallery">
+      <div class="gallery-item">
+        <img src="/media/Sigma_Patagonia.jpg" alt="Omar in Patagonia" loading="lazy" />
+      </div>
+      <div class="gallery-item">
+        <img src="/media/RIAT_Typhoon.jpg" alt="Typhoon at RIAT airshow" loading="lazy" />
+      </div>
+      <div class="gallery-item">
+        <img src="/media/uni_pic.jpg" alt="University days" loading="lazy" />
+      </div>
+      <div class="gallery-item">
+        <img src="/media/WS_Bro_Pic.jpg" alt="With the bro" loading="lazy" />
+      </div>
+      <div class="gallery-item">
+        <img src="/media/WS_Mandem.jpg" alt="The mandem" loading="lazy" />
+      </div>
+      <div class="gallery-item">
+        <img src="/media/WS_Pic_System.jpg" alt="Working on systems" loading="lazy" />
+      </div>
+      <div class="gallery-item">
+        <img src="/media/WS_Pic.jpg" alt="Omar at work" loading="lazy" />
+      </div>
+    </div>
+
     <div class="about-content">
       <p>
         I'm Omar Maaouane Veiga, a London-based engineer with a background in robotics
@@ -16,59 +41,57 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </p>
 
       <p>
-        My interest in data-driven problem solving started with robotics: building
-        systems that took in data and turned it into useful actions.
-        Over time, I realised that the same mindset applies incredibly well to data
-        analytics, except now I build systems that take in data and turns it into
-        useful actions <em>for humans</em>.
+        It started with robotics; building things that sense the world and do
+        something about it. Turns out that same thinking works just as well when
+        the "robot" is a dashboard and the "action" is a human going
+        <em>"oh, that's what's going on."</em> So now I do both.
       </p>
 
       <p>
-        I’m particularly motivated by work that has real impact. I enjoy building
-        tools and analyses that people actually use, that improve decision-making,
-        and that make systems more reliable, ethical, or efficient. I’m also deeply
-        driven by continuous learning, especially when it pushes me outside my
-        comfort zone.
+        For me it doesn't matter which discipline it is. I'm hungry for knowledge
+        and the world is my buffet 😋.
       </p>
 
       <h2>What I work with</h2>
 
       <p>
-        My work sits at the intersection of engineering and analytics. Depending on
-        the problem, that might look like:
+        I could list off technologies and projects all day but it'd be faster to just say that
+        I'm a computer nerd with a big taste in practical electronics. Yes I code, but I also solder
+        things together into inventions that make use of that code.
       </p>
 
-      <ul>
-        <li><strong>Data &amp; Analytics</strong> — Python, data pipelines, exploratory analysis, stakeholder-focused insights</li>
-        <li><strong>Software Engineering</strong> — backend systems, APIs, automation, maintainable codebases</li>
-        <li><strong>Hardware &amp; Systems</strong> — robotics, embedded systems, sensors, control software</li>
-        <li><strong>Cloud &amp; Tooling</strong> — learning and applying modern cloud tools to real problems under tight deadlines</li>
-      </ul>
+      <p>
+        Python is my go-to for wrangling data. If something needs a backend, an API,
+        or just a script that saves someone three hours a week, I'll build it. And if
+        the problem lives in the physical world — sensors, motors, embedded boards —
+        even better I'll usually switch over to C++.
+      </p>
 
       <h2>How I work</h2>
 
       <p>
-        I value clear communication, structured thinking, and collaboration. I’ve
-        learned that the best solutions come from understanding stakeholder needs,
-        questioning assumptions, and iterating quickly with feedback. I aim to keep
-        things simple, robust, and easy to explain — especially when non-technical
-        teams rely on the outcome.
+        Honestly? I just talk to people. Over half the job is figuring out what someone
+        actually needs versus what they think they need. Once that's clear, I move
+        fast, keep things simple, and try not to build anything that needs a manual
+        to understand. An intuitive product is a product that makes all of this fancy tech
+        actually of use to anybody other than me after all.
       </p>
 
       <h2>Beyond work</h2>
 
       <p>
-        Outside of engineering, I enjoy tinkering with side projects, exploring ideas
-        that spark my curiosity, and learning from communities of people who care
-        deeply about what they build. I’m also a long-time origami enthusiast — a
-        surprisingly good exercise in patience, precision, and problem solving.
+        When I'm not neck-deep in code or circuits, I'm probably tinkering with some
+        side project that caught my eye, folding origami, modelling characters in
+        Blender, or even geeking out over fighter jets at an airshow.
+        I like building things, breaking things, and figuring out how things work.
+        That's basically the whole personality.
       </p>
 
       <h2>Get in touch</h2>
 
       <p>
-        I’m always happy to chat about data, engineering, interesting problems, or
-        potential collaborations. The best way to reach me is via email or LinkedIn.
+        If any of this sounds like your kind of conversation, I'm always up for a
+        chat. Drop me an email or find me on LinkedIn — I don't bite.
       </p>
     </div>
   </section>
@@ -80,6 +103,35 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     margin-bottom: 2rem;
   }
 
+  /* ── Photo gallery (CSS columns masonry) ── */
+  .gallery {
+    columns: 3;
+    column-gap: 0.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .gallery-item {
+    break-inside: avoid;
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    transition: transform 0.4s ease, filter 0.4s ease;
+    filter: grayscale(20%);
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.03);
+    filter: grayscale(0%);
+  }
+
+  /* ── About content ── */
   .about-content {
     font-size: 1.0625rem;
     line-height: 1.8;
@@ -98,5 +150,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
   .about-content li {
     margin-bottom: 0.625rem;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .gallery {
+      columns: 2;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .gallery {
+      columns: 1;
+    }
   }
 </style>

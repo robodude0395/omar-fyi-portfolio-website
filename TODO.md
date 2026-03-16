@@ -1,0 +1,42 @@
+# Posts to make:
++ (Fun idea) A swearing LLM robot BMO like robot with a british accent! Just like that one BMO robot it'll listen and respond with swearing included. It could even detect certain parts on your speech and generate a sweary response back.
++ (Fun idea) Adding browser mic for backwards talk and voice stream allowing me to make a remote calling robot.
++ (In progress) A rpi webcam livestream server (Which I might implement later on the rpi tank project).
++ (In progress) An altoids/mint box arcade game handheld made with upcycled vape batteries.
++ (In progress) A fancypants training model for f1 cars that is trained from dozens of hours of f1 driver telemetry data. Something like Max Verstap-bot.
++ A whole shopping website made in AWS workshop #2.
++ (In progress) A local LLM coding agent I can connect through a vs code extension and will act on my workspace just like Claude but instead using an LLM I am hosting on a remote machine.
++ POST TUTORIAL VIDEO ON HOW TO SET UP THE AGENT FROM SCRATCH
++ Post showing I got featured in MDX's front page!
++ Hackathon idea: E-Commerce portal that generates quotes for salespeople based on what smiths has to offer. Amazon os
++ AWS hacktahon kiro made microblogging app. Th emain USP of it is that it was a AWS workshop where I built a microblogging app in mere days using kiro: a very powerfull agentic AI IDE.
++ SMARS rover rpi-zero remote tank made with 3D printed parts and recycled vape batteries.
++ How I made the site using Open Claw!
++ pokeme rpi screen
++ trendfunnel
++ ros2 robot from scratch
++ WS timer machine
++ rpi pokedex
++ Michael’s weird radar thingy
++ Meme-a-tron 9000
++ 3D printed servo arm (that can pick and place using blender)
++ 3D printed self-balancing robot
++ Flight motion platform (include videos and link to Raes post and repo AND final presentation)
++ Hayati LED display reverse engineering project
++ T3 Performance monitoring system
++ Sigmario (hackathon project)
++ AI farm from scrapped desktop
++ AI tracking camera for uno cards
++ Siemens NX robo-gripper simulation
++ Sorting MPS station project
++ MPS segregator 9000
++ Teensy volume meter connected to a ds.
++ Arduino pro micro hotkey keyboard
++ Point to point robot (essentially a pre-cursor to the proper ros2 robot).
++ 3D printed airplane 'project'.
++ Nerf dart turret.
++ WS 2024 medal
+
+# Games
++ Soulslike game
++ Portal game project

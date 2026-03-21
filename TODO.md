@@ -36,7 +36,15 @@
 + 3D printed airplane 'project'.
 + Nerf dart turret.
 + WS 2024 medal
++ OMRON Visit Day
++ Graduation day
++Test video for Climbing pig
++RIAT day with pic dump
 
 # Games
 + Soulslike game
 + Portal game project
+
+# Misc
++ Import images from S22 phone and include them onto my blogs such as the Mercedes interview pics
++ Make a video announcing the portfolio site and put it in all my social bios!

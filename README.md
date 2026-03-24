@@ -176,6 +176,19 @@ git push origin main
 
 The GitHub Action will build the Astro site, sync it to S3, and invalidate the CloudFront cache. Your site should be live within ~90 seconds.
 
+
+### 7. Sync local content to bucket media folder
+
+Now you have a running website however you won't be able to upload much content to it since github has a limit of
+500MB. In order to sync your content to the remote bucket just run:
+
+```bash
+chmod +x sync_media_files_to_site.sh
+./sync_media_files_to_site.sh
+```
+
+And all your media content will be uploaded to the bucket. This goes for all the content located at `frontend/public/media`
+
 ## Deployment Workflow
 
 ### Automatic Deployment

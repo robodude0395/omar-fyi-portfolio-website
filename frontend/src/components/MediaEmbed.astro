@@ -1,0 +1,41 @@
+---
+interface Props {
+  /** "video" | "iframe" | "image" — type of media to embed */
+  type?: "video" | "iframe" | "image";
+  /** Source URL or path for the media */
+  src: string;
+  /** Alt text for images */
+  alt?: string;
+}
+
+const { type = "iframe", src, alt = "" } = Astro.props;
+---
+
+<div class="media-embed">
+  <div class="media-embed__media">
+    {type === "video" && (
+      <video src={src} controls>
+        <track kind="captions" />
+      </video>
+    )}
+    {type === "iframe" && (
+      <iframe
+        src={src}
+        width="100%"
+        height="700"
+        frameborder="0"
+        scrolling="no"
+        allowtransparency="true"
+        loading="lazy"
+      ></iframe>
+    )}
+    {type === "image" && (
+      <img src={src} alt={alt} loading="lazy" />
+    )}
+  </div>
+  {Astro.slots.has("default") && (
+    <div class="media-embed__caption">
+      <slot />
+    </div>
+  )}
+</div>

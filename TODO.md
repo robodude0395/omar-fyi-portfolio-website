@@ -7,9 +7,16 @@
 + A whole shopping website made in AWS workshop #2.
 + (In progress) A local LLM coding agent I can connect through a vs code extension and will act on my workspace just like Claude but instead using an LLM I am hosting on a remote machine.
 + POST TUTORIAL VIDEO ON HOW TO SET UP THE AGENT FROM SCRATCH
-+ Post showing I got featured in MDX's front page!
++ (In progress) Home NAS I used to back up all my photos and stuff
+
++DONE Post showing I got featured in MDX's front page!
+
++ How I made a basic home server NAS using a 6TB hard drive and a rpi 5.
++ How I wiressly connected to my old broken phone using adb tools and srcpy in order to rescue old picture and move them to my NAS.
++ Make a funny video/short to announce my amazing new portfolio site!
+
 + Hackathon idea: E-Commerce portal that generates quotes for salespeople based on what smiths has to offer. Amazon os
-+ AWS hacktahon kiro made microblogging app. Th emain USP of it is that it was a AWS workshop where I built a microblogging app in mere days using kiro: a very powerfull agentic AI IDE.
++ AWS hacktahon kiro made microblogging app. The main USP of it is that it was a AWS workshop where I built a microblogging app in mere days using kiro: a very powerfull agentic AI IDE.
 + SMARS rover rpi-zero remote tank made with 3D printed parts and recycled vape batteries.
 + How I made the site using Open Claw!
 + pokeme rpi screen

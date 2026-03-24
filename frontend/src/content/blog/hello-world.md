@@ -4,10 +4,13 @@ description: "Welcome to my corner of the internet. A brief introduction to who 
 pubDate: 2026-02-18
 tags: ["personal", "intro"]
 thumbnail: "/media/hehe.jpg"
+heroImage: "/media/hehe.jpg"
 draft: false
 ---
 
 Welcome. I'm Omar Maaouane, and this is my personal space on the web.
+
+![Me](/media/profile.jpg)
 
 I've been meaning to build this site for a while now. Not because the world needs another developer blog — it doesn't — but because I wanted a place that's mine. No algorithms deciding what you see, no character limits, no engagement metrics. Just words on a page.
 

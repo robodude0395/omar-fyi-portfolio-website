@@ -1,0 +1,24 @@
+---
+interface Props {
+  /** Display title for the link */
+  title: string;
+  /** URL to link to */
+  href: string;
+  /** Optional description shown below the title */
+  description?: string;
+}
+
+const { title, href, description } = Astro.props;
+
+// Extract domain for display
+const domain = new URL(href).hostname.replace("www.", "");
+---
+
+<a class="link-card" href={href} target="_blank" rel="noopener noreferrer">
+  <div class="link-card__content">
+    <span class="link-card__title">{title}</span>
+    {description && <span class="link-card__description">{description}</span>}
+    <span class="link-card__domain">{domain}</span>
+  </div>
+  <span class="link-card__arrow" aria-hidden="true">↗</span>
+</a>

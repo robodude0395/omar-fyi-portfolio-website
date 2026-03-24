@@ -23,7 +23,9 @@ const posts = (await getPublishedPosts()).slice(0, 3);
         </div>
       </div>
       <div class="hero-photo">
-        <img src="/media/Omar_Hero.png" alt="Omar Maaouane Veiga" width="280" height="280" />
+        <a href="/about" aria-label="Learn more about Omar">
+          <img src="/media/Omar_Hero.png" alt="Omar Maaouane Veiga" width="280" height="280" />
+        </a>
       </div>
     </div>
   </section>
@@ -85,7 +87,7 @@ const posts = (await getPublishedPosts()).slice(0, 3);
   .greeting {
     font-family: var(--font-mono);
     font-size: 1rem;
-    color: var(--color-accent);
+    color: var(--color-text-muted);
     margin-bottom: 0.5rem;
   }
 
@@ -156,6 +158,21 @@ const posts = (await getPublishedPosts()).slice(0, 3);
     list-style: none;
     padding: 0;
     margin: 0 0 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  @media (max-width: 768px) {
+    .post-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .post-list {
+      grid-template-columns: 1fr;
+    }
   }
 
   .view-all {

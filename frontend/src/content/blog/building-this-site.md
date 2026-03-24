@@ -4,10 +4,11 @@ description: "A deep dive into the tech stack behind this site — static genera
 pubDate: 2026-02-18
 tags: ["astro", "aws", "terraform", "infrastructure", "devops"]
 thumbnail: "/media/architecture_diagram.png"
+heroImage: "/media/architecture_diagram.png"
 draft: false
 ---
 
-Every developer blog needs a post about how it was built. It's tradition. So here's mine.
+Every developer blog needs a post about how it was built. So here's mine.
 
 ## The requirements
 
@@ -20,11 +21,13 @@ I wanted something simple:
 5. **Mine** — custom domain, full control
 
 ## The architecture
-For my portfolio website I wanted something that I had 101% control over. Not only that I also wanted the website itself to be a technical showcase of all the fun cloud things I learned during my role at Sigma Labs where I learned all kinds of cloud technologies.
+For my portfolio website I wanted something that I had 101% control over. Not only that I also wanted the website itself to be a technical showcase of all the fun cloud things I learned during my role at Sigma Labs.
 
 ![Cloud Architecture](/media/architecture_diagram.png)
 
-That's when I arrived at the current architecture you see above. In essence, my site is a github repository I keep updated with all my portfolio posts (yes even this one right here).
+That's when I arrived at the current architecture you see above. In essence, my site is a github repository I keep updated with all my portfolio posts (yes even this one right here). The larger content such as images and videos are not sent to the remote repo. This content lives on a `frontend/public/media` folder which gets synced to the remote S3 bucket anytime I run `./sync_media_files_to_site.sh`.
+
+As a programmer I find this system easier than signing up for something like squarespace or wix. Although their GUI is made to be intuitive I often find it more finnicky than pleasing to use. This system makes use of the technologies I know off and it's easy for me to maintain over time.  Emphasis on this being easier for **me**.
 
 Theres a lot of frameworks I used in order to make my life a little bit easier such as:
 + **Terraform**: Just in case the warehouse hosting my server burns to ash, I can set my whole website again using literally just one command 'terraform apply'.
@@ -39,7 +42,6 @@ Theres a lot of frameworks I used in order to make my life a little bit easier s
 + **Cloudfront static hosting + S3**: Because this is literally having a server host a few static files from a bucket where data storage is functionally free at this scale. Not just that the servers where the files are hosted are edge servers meant to deliver static html ASAP to your hungry eyes!
 
 And many more technologies that are explained in excruciating detail on my github repo and later on this post. Enjoy!
-
 
 This is the part where you STOP READING because I am about to ramble a whole book about the technologies used in this site. So unless you are a massive nerd and are not particularly pressed for time... I dunno go away.
 

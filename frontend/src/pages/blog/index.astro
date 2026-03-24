@@ -48,6 +48,21 @@ const posts = await getPublishedPosts();
     list-style: none;
     padding: 0;
     margin: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  @media (max-width: 768px) {
+    .post-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .post-list {
+      grid-template-columns: 1fr;
+    }
   }
 
   .empty {

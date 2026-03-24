@@ -1,10 +1,17 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SocialLinks from "../components/SocialLinks.astro";
 ---
 
 <BaseLayout title="About — Omar Maaouane Veiga" description="A bit about Omar Maaouane Veiga — data-driven engineer based in London.">
   <section class="about">
     <h1>About</h1>
+    <p>
+      Hello! My name is Omar Maaouane Veiga, I am a London-based engineer with a background in robotics
+      and programming. I love making useful systems that people can use. Whether it's to get a
+      chuckle from them or for legitimate use, that's what tech is needed for right? To make our lives better
+      in some way.
+    </p>
 
     <!-- ── Hero gallery ── -->
     <div class="gallery">
@@ -12,19 +19,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <img src="/media/Sigma_Patagonia.jpg" alt="Omar in Patagonia" loading="lazy" />
       </div>
       <div class="gallery-item">
-        <img src="/media/RIAT_Typhoon.jpg" alt="Typhoon at RIAT airshow" loading="lazy" />
+        <img src="/media/RIAT_Typhoon.jpg" alt="Omar posing in front of Spanish Typhoon at RIAT airshow" loading="lazy" />
       </div>
       <div class="gallery-item">
         <img src="/media/uni_pic.jpg" alt="University days" loading="lazy" />
       </div>
       <div class="gallery-item">
-        <img src="/media/WS_Bro_Pic.jpg" alt="With the bro" loading="lazy" />
+        <img src="/media/WS_Bro_Pic.jpg" alt="Omar WS picture with his teammate" loading="lazy" />
       </div>
       <div class="gallery-item">
-        <img src="/media/WS_Mandem.jpg" alt="The mandem" loading="lazy" />
+        <img src="/media/WS_Mandem.jpg" alt="WS picture with my teammate and other friends we met" loading="lazy" />
       </div>
       <div class="gallery-item">
-        <img src="/media/WS_Pic_System.jpg" alt="Working on systems" loading="lazy" />
+        <img src="/media/WS_Pic_System.jpg" alt="WS systems pic" loading="lazy" />
       </div>
       <div class="gallery-item">
         <img src="/media/WS_Pic.jpg" alt="Omar at work" loading="lazy" />
@@ -32,26 +39,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </div>
 
     <div class="about-content">
-      <p>
-        I'm Omar Maaouane Veiga, a London-based engineer with a background in robotics
-        and a strong passion for solving problems through data. I enjoy working on
-        systems that take in messy, real-world information and turn it into something
-        useful, whether that system lives in software, hardware, or somewhere in
-        between.
-      </p>
-
-      <p>
-        It started with robotics; building things that sense the world and do
-        something about it. Turns out that same thinking works just as well when
-        the "robot" is a dashboard and the "action" is a human going
-        <em>"oh, that's what's going on."</em> So now I do both.
-      </p>
-
-      <p>
-        For me it doesn't matter which discipline it is. I'm hungry for knowledge
-        and the world is my buffet 😋.
-      </p>
-
       <h2>What I work with</h2>
 
       <p>
@@ -70,11 +57,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <h2>How I work</h2>
 
       <p>
-        Honestly? I just talk to people. Over half the job is figuring out what someone
-        actually needs versus what they think they need. Once that's clear, I move
-        fast, keep things simple, and try not to build anything that needs a manual
+        Honestly? I just talk to people. The most important part of any project is knowing what you or
+        the client has to do. Once I have solid list of requirements, I'll plan out a timeline and get to work!
+        I move fast, keep things simple, and try not to build anything that needs a manual
         to understand. An intuitive product is a product that makes all of this fancy tech
-        actually of use to anybody other than me after all.
+        actually useful to anybody other than me.
       </p>
 
       <h2>Beyond work</h2>
@@ -84,7 +71,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         side project that caught my eye, folding origami, modelling characters in
         Blender, or even geeking out over fighter jets at an airshow.
         I like building things, breaking things, and figuring out how things work.
-        That's basically the whole personality.
+        That's me in a nutshell.
       </p>
 
       <h2>Get in touch</h2>
@@ -93,6 +80,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         If any of this sounds like your kind of conversation, I'm always up for a
         chat. Drop me an email or find me on LinkedIn — I don't bite.
       </p>
+
+      <SocialLinks variant="labeled" size={20} />
     </div>
   </section>
 </BaseLayout>
@@ -139,7 +128,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
   .about-content h2 {
     font-size: 1.25rem;
-    font-family: var(--font-mono);
     margin-top: 2.5rem;
     margin-bottom: 1rem;
   }

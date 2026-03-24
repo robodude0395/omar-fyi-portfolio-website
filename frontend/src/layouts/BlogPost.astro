@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import BaseLayout from "./BaseLayout.astro";
+import SocialLinks from "../components/SocialLinks.astro";
 
 interface Props {
   post: CollectionEntry<"blog">;
@@ -60,6 +61,11 @@ const formattedUpdatedDate = updatedDate?.toLocaleDateString("en-GB", {
 
     <footer class="post-footer">
       <a href="/blog" class="back-link">&larr; Back to all posts</a>
+
+      <div class="post-footer-socials">
+        <p class="connect-label">Connect with me</p>
+        <SocialLinks size={18} />
+      </div>
     </footer>
   </article>
 </BaseLayout>
@@ -125,7 +131,7 @@ const formattedUpdatedDate = updatedDate?.toLocaleDateString("en-GB", {
   .post-content {
     font-size: 1.0625rem;
     line-height: 1.8;
-    max-width: var(--content-width);
+    padding: 0 1rem;
   }
 
   .post-footer {
@@ -142,6 +148,127 @@ const formattedUpdatedDate = updatedDate?.toLocaleDateString("en-GB", {
   }
 
   .back-link:hover {
+    color: var(--color-accent);
+  }
+
+  .post-footer-socials {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .connect-label {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  /* Media embed utility classes */
+  .post-content :global(.media-embed) {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    margin: 1.5rem 0;
+  }
+
+  /* Alternate direction: even embeds flip media to the right */
+  .post-content :global(.media-embed:nth-of-type(even)) {
+    flex-direction: row-reverse;
+  }
+
+  .post-content :global(.media-embed__media) {
+    flex: 1 1 0;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .post-content :global(.media-embed__media video),
+  .post-content :global(.media-embed__media img) {
+    width: 100%;
+    object-fit: contain;
+  }
+
+  .post-content :global(.media-embed__media iframe) {
+    width: 100%;
+    min-height: 700px;
+    border: none;
+    margin-bottom: 0.75rem;
+  }
+
+  .post-content :global(.media-embed__caption) {
+    flex: 1 1 0;
+    min-width: 0;
+    background: var(--color-bg);
+    padding: 1.25rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+  }
+
+  @media (max-width: 640px) {
+    .post-content :global(.media-embed) {
+      flex-direction: column;
+    }
+    .post-content :global(.media-embed:nth-of-type(even)) {
+      flex-direction: column;
+    }
+  }
+
+  /* Link card styles */
+  .post-content :global(.link-card) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-bg);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color var(--transition), background var(--transition);
+    margin: 0.75rem 0;
+  }
+
+  .post-content :global(.link-card:hover) {
+    border-color: var(--color-accent);
+    background: rgba(59, 130, 246, 0.05);
+  }
+
+  .post-content :global(.link-card__content) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 0;
+  }
+
+  .post-content :global(.link-card__title) {
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-accent);
+  }
+
+  .post-content :global(.link-card__description) {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+  }
+
+  .post-content :global(.link-card__domain) {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    opacity: 0.7;
+  }
+
+  .post-content :global(.link-card__arrow) {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    transition: color var(--transition);
+  }
+
+  .post-content :global(.link-card:hover .link-card__arrow) {
     color: var(--color-accent);
   }
 

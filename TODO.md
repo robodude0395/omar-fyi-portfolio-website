@@ -8,6 +8,7 @@
 + (In progress) A local LLM coding agent I can connect through a vs code extension and will act on my workspace just like Claude but instead using an LLM I am hosting on a remote machine.
 + POST TUTORIAL VIDEO ON HOW TO SET UP THE AGENT FROM SCRATCH
 + (In progress) Home NAS I used to back up all my photos and stuff
++ Show off portfolio site to Wayne. Emphasize how my time at SL allowed me to so quickly adapt and learn how to do so much more.
 
 +DONE Post showing I got featured in MDX's front page!
 
@@ -20,8 +21,9 @@
 + SMARS rover rpi-zero remote tank made with 3D printed parts and recycled vape batteries.
 + How I made the site using Open Claw!
 + pokeme rpi screen
-+ trendfunnel
++ trendfunnel final sigma labs project
 + ros2 robot from scratch
++ Eurobot waypoint follower
 + WS timer machine
 + rpi pokedex
 + Michael’s weird radar thingy

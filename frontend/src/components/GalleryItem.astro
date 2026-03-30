@@ -1,0 +1,170 @@
+---
+interface Props {
+  /** Path to the media file relative to site root, e.g. "/media/worldskills/photo.jpg" */
+  src: string;
+  /** Optional one-line description */
+  description?: string;
+  /** Media type: "image" or "video" */
+  type: "image" | "video";
+  /** Zero-based index for lightbox navigation */
+  index: number;
+}
+
+const { src, description, type, index } = Astro.props;
+
+/** Derive alt text from description or filename fallback */
+const filename = src.split("/").pop() ?? src;
+const alt = description || filename;
+---
+
+<div
+  class:list={["gallery-item", { "gallery-item--video": type === "video" }]}
+  data-index={index}
+  data-src={src}
+  data-type={type}
+  data-description={description ?? ""}
+  role="button"
+  tabindex="0"
+>
+  {type === "image" ? (
+    <img src={src} alt={alt} loading="lazy" />
+  ) : (
+    <video preload="metadata" muted playsinline>
+      <source src={src} type={`video/${src.split(".").pop()}`} />
+    </video>
+  )}
+
+  {type === "video" && (
+    <div class="gallery-item__play-overlay">
+      <svg class="gallery-item__play-icon" viewBox="0 0 48 48" fill="none">
+        <circle cx="24" cy="24" r="23" fill="rgba(0,0,0,0.6)" stroke="rgba(255,255,255,0.8)" stroke-width="2" />
+        <polygon points="19,14 19,34 36,24" fill="#fff" />
+      </svg>
+    </div>
+  )}
+
+  {description && (
+    <div class="gallery-item__overlay">
+      <p class="gallery-item__description">{description}</p>
+    </div>
+  )}
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll<HTMLElement>(".gallery-item").forEach((item) => {
+      const open = () => {
+        item.dispatchEvent(
+          new CustomEvent("gallery:open", {
+            bubbles: true,
+            detail: {
+              index: Number(item.dataset.index),
+              src: item.dataset.src,
+              type: item.dataset.type,
+              description: item.dataset.description,
+            },
+          })
+        );
+      };
+
+      item.addEventListener("click", open);
+      item.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          open();
+        }
+      });
+
+      // Video hover preview: play on mouseenter, pause on mouseleave
+      if (item.dataset.type === "video") {
+        const video = item.querySelector("video");
+        if (video) {
+          item.addEventListener("mouseenter", () => {
+            video.currentTime = 0;
+            video.play().catch(() => {});
+          });
+          item.addEventListener("mouseleave", () => {
+            video.pause();
+            video.currentTime = 0;
+          });
+        }
+      }
+    });
+  });
+</script>
+
+<style>
+  .gallery-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    break-inside: avoid;
+    margin-bottom: 1rem;
+    border: 1px solid var(--color-border);
+    transition: border-color var(--transition);
+  }
+
+  .gallery-item:hover {
+    border-color: var(--color-accent);
+  }
+
+  .gallery-item img,
+  .gallery-item video {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+    pointer-events: none;
+  }
+
+  /* Video play overlay */
+  .gallery-item__play-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity var(--transition);
+  }
+
+  .gallery-item__play-icon {
+    width: 56px;
+    height: 56px;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+    transition: transform var(--transition), opacity var(--transition);
+  }
+
+  /* Hide play button on hover (video starts playing) */
+  .gallery-item--video:hover .gallery-item__play-overlay {
+    opacity: 0;
+  }
+
+  /* Description overlay */
+  .gallery-item__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: opacity var(--transition);
+    z-index: 2;
+  }
+
+  .gallery-item:hover .gallery-item__overlay,
+  .gallery-item:focus-within .gallery-item__overlay {
+    opacity: 1;
+  }
+
+  .gallery-item__description {
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.4;
+    margin: 0;
+  }
+</style>

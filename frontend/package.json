@@ -7,12 +7,16 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "gallery:init": "npx tsx scripts/gallery-init.ts"
   },
   "dependencies": {
     "@astrojs/mdx": "^3.1.9",
     "@astrojs/sitemap": "3.2.1",
     "astro": "^4.16.18",
     "sharp": "^0.33.5"
+  },
+  "devDependencies": {
+    "tsx": "^4.21.0"
   }
 }

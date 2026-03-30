@@ -53,5 +53,6 @@
 + Portal game project
 
 # Misc
-+ Import images from S22 phone and include them onto my blogs such as the Mercedes interview pics
 + Make a video announcing the portfolio site and put it in all my social bios!
++ Get original broadcast recording of WS awards ceremony and put it in the blogpost
++ Get congratulation letter from barnet representative I got a while ago

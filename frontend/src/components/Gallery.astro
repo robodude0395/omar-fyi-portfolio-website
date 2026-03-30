@@ -46,8 +46,7 @@ if (fs.existsSync(manifestPath)) {
   for (const entry of manifest) {
     const type = classifyFile(entry.file);
     if (!type) continue;
-    const filePath = path.join(mediaDir, entry.file);
-    if (!fs.existsSync(filePath)) continue;
+    // Trust the manifest — media files live on S3 and may not exist locally in CI
     items.push({
       src: `/media/${folder}/${entry.file}`,
       description: entry.description ?? "",

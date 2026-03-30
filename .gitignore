@@ -6,7 +6,11 @@ dist/
 .astro/
 
 # Media assets (served from S3 in production, not committed to Git)
-frontend/public/media/
+frontend/public/media/**
+# But keep gallery manifests — they're needed at build time
+!frontend/public/media/
+!frontend/public/media/*/
+!frontend/public/media/**/gallery.json
 
 # Environment
 *.env

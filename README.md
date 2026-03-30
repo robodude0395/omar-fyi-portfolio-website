@@ -235,6 +235,47 @@ aws cloudfront create-invalidation \
 - **Least privilege** — CloudFront OAC grants read-only access to S3 objects
 - **Infrastructure as Code** — all resources are defined, versioned, and auditable
 
+## Post Gallery
+
+Blog posts can include an optional photo/video gallery appendix. To enable it:
+
+1. Add `gallery: "folder-name"` to the post's frontmatter, where `folder-name` matches a directory under `frontend/public/media/`.
+
+   ```md
+   ---
+   title: "My Post"
+   description: "A cool project"
+   pubDate: 2025-06-01
+   gallery: "my-project"
+   ---
+
+   Post content goes here...
+   ```
+
+   That's it — the "Behind the Scenes" navigation button and gallery section are automatically injected by the `BlogPost` layout. You don't need to add anything in the post body itself.
+
+2. Scaffold a `gallery.json` manifest:
+
+   ```bash
+   cd frontend
+   npm run gallery:init -- folder-name
+   ```
+
+   This scans the media folder and generates a `gallery.json` skeleton with all discovered images and videos.
+
+3. Edit `gallery.json` to add descriptions and reorder items:
+
+   ```json
+   [
+     { "file": "IMG_001.jpg", "description": "Soldering the main PCB" },
+     { "file": "demo.mp4", "description": "" }
+   ]
+   ```
+
+   Each entry has a required `file` (filename) and an optional `description` (one-line caption). Only files listed in the manifest are displayed, in the order specified. If no `gallery.json` exists, all supported media files are auto-discovered and sorted alphabetically.
+
+Supported formats: `.jpg`, `.jpeg`, `.png`, `.webp`, `.gif`, `.mp4`, `.webm`.
+
 ## License
 
 Content is © Omar Maaouane Veiga. Code is available for reference.

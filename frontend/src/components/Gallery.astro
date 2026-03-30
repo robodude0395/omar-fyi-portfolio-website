@@ -1,0 +1,123 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+import GalleryItem from "./GalleryItem.astro";
+import GalleryLightbox from "./GalleryLightbox.astro";
+
+interface Props {
+  /** Name of the media folder under public/media/ */
+  folder: string;
+}
+
+interface GalleryManifestEntry {
+  file: string;
+  description?: string;
+}
+
+interface ResolvedGalleryItem {
+  src: string;
+  description: string;
+  type: "image" | "video";
+}
+
+const IMAGE_EXTENSIONS = [".jpg", ".jpeg", ".png", ".webp", ".gif"];
+const VIDEO_EXTENSIONS = [".mp4", ".webm"];
+const SUPPORTED_EXTENSIONS = [...IMAGE_EXTENSIONS, ...VIDEO_EXTENSIONS];
+
+const { folder } = Astro.props;
+
+const mediaDir = path.join(process.cwd(), "public", "media", folder);
+const manifestPath = path.join(mediaDir, "gallery.json");
+
+function classifyFile(filename: string): "image" | "video" | null {
+  const ext = path.extname(filename).toLowerCase();
+  if (IMAGE_EXTENSIONS.includes(ext)) return "image";
+  if (VIDEO_EXTENSIONS.includes(ext)) return "video";
+  return null;
+}
+
+let items: ResolvedGalleryItem[] = [];
+
+if (fs.existsSync(manifestPath)) {
+  // Manifest exists — resolve items in manifest order, filtering to listed files only
+  const raw = fs.readFileSync(manifestPath, "utf-8");
+  const manifest: GalleryManifestEntry[] = JSON.parse(raw);
+
+  for (const entry of manifest) {
+    const type = classifyFile(entry.file);
+    if (!type) continue;
+    const filePath = path.join(mediaDir, entry.file);
+    if (!fs.existsSync(filePath)) continue;
+    items.push({
+      src: `/media/${folder}/${entry.file}`,
+      description: entry.description ?? "",
+      type,
+    });
+  }
+} else if (fs.existsSync(mediaDir)) {
+  // No manifest — auto-discover supported files sorted alphabetically
+  const files = fs.readdirSync(mediaDir).sort((a, b) =>
+    a.localeCompare(b, undefined, { sensitivity: "base" })
+  );
+
+  for (const file of files) {
+    const type = classifyFile(file);
+    if (!type) continue;
+    items.push({
+      src: `/media/${folder}/${file}`,
+      description: "",
+      type,
+    });
+  }
+}
+---
+
+{items.length > 0 && (
+  <section id="gallery" class="gallery-section">
+    <h2>Gallery</h2>
+    <div class="gallery-grid">
+      {items.map((item, index) => (
+        <GalleryItem
+          src={item.src}
+          description={item.description}
+          type={item.type}
+          index={index}
+        />
+      ))}
+    </div>
+    <GalleryLightbox />
+  </section>
+)}
+
+<style>
+  .gallery-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .gallery-section h2 {
+    font-family: var(--font-sans);
+    font-size: 1.5rem;
+    color: var(--color-text);
+    margin-bottom: 1.5rem;
+    margin-top: 0;
+  }
+
+  .gallery-grid {
+    column-count: 3;
+    column-gap: 1rem;
+  }
+
+  @media (max-width: 1024px) {
+    .gallery-grid {
+      column-count: 2;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .gallery-grid {
+      column-count: 1;
+    }
+  }
+</style>

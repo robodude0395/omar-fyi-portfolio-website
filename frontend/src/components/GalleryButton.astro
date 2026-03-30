@@ -1,0 +1,57 @@
+---
+interface Props {
+  targetId?: string;
+}
+
+const { targetId = "gallery" } = Astro.props;
+---
+
+<a class="gallery-button" href={`#${targetId}`}>
+  <span class="gallery-button__label">Behind the Scenes</span>
+  <svg class="gallery-button__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="6 9 12 15 18 9"></polyline>
+  </svg>
+</a>
+
+<style>
+  .gallery-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    margin-top: 2.5rem;
+    border: 2px solid var(--color-accent);
+    border-radius: 8px;
+    background: rgba(59, 130, 246, 0.08);
+    color: var(--color-accent);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition:
+      border-color var(--transition),
+      background var(--transition),
+      color var(--transition),
+      transform var(--transition),
+      box-shadow var(--transition);
+  }
+
+  .gallery-button:hover {
+    background: var(--color-accent);
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+  }
+
+  .gallery-button__arrow {
+    transition: transform var(--transition);
+  }
+
+  .gallery-button:hover .gallery-button__arrow {
+    transform: translateY(2px);
+  }
+</style>

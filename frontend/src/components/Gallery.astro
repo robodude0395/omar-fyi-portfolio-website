@@ -7,6 +7,8 @@ import GalleryLightbox from "./GalleryLightbox.astro";
 interface Props {
   /** Name of the media folder under public/media/ */
   folder: string;
+  /** Number of items to show per batch (default: 12) */
+  batchSize?: number;
 }
 
 interface GalleryManifestEntry {
@@ -22,9 +24,8 @@ interface ResolvedGalleryItem {
 
 const IMAGE_EXTENSIONS = [".jpg", ".jpeg", ".png", ".webp", ".gif"];
 const VIDEO_EXTENSIONS = [".mp4", ".webm"];
-const SUPPORTED_EXTENSIONS = [...IMAGE_EXTENSIONS, ...VIDEO_EXTENSIONS];
 
-const { folder } = Astro.props;
+const { folder, batchSize = 12 } = Astro.props;
 
 const mediaDir = path.join(process.cwd(), "public", "media", folder);
 const manifestPath = path.join(mediaDir, "gallery.json");
@@ -39,7 +40,6 @@ function classifyFile(filename: string): "image" | "video" | null {
 let items: ResolvedGalleryItem[] = [];
 
 if (fs.existsSync(manifestPath)) {
-  // Manifest exists — resolve items in manifest order, filtering to listed files only
   const raw = fs.readFileSync(manifestPath, "utf-8");
   const manifest: GalleryManifestEntry[] = JSON.parse(raw);
 
@@ -55,7 +55,6 @@ if (fs.existsSync(manifestPath)) {
     });
   }
 } else if (fs.existsSync(mediaDir)) {
-  // No manifest — auto-discover supported files sorted alphabetically
   const files = fs.readdirSync(mediaDir).sort((a, b) =>
     a.localeCompare(b, undefined, { sensitivity: "base" })
   );
@@ -70,13 +69,16 @@ if (fs.existsSync(manifestPath)) {
     });
   }
 }
+
+const initialItems = items.slice(0, batchSize);
+const hasMore = items.length > batchSize;
 ---
 
 {items.length > 0 && (
   <section id="gallery" class="gallery-section">
     <h2>Gallery</h2>
-    <div class="gallery-grid">
-      {items.map((item, index) => (
+    <div class="gallery-grid" id="gallery-grid">
+      {initialItems.map((item, index) => (
         <GalleryItem
           src={item.src}
           description={item.description}
@@ -85,9 +87,168 @@ if (fs.existsSync(manifestPath)) {
         />
       ))}
     </div>
+
+    {hasMore && (
+      <button
+        class="gallery-load-more"
+        id="gallery-load-more"
+        type="button"
+        aria-label={`Load more gallery items (${items.length - batchSize} remaining)`}
+      >
+        <span class="gallery-load-more__label">
+          Load More ({items.length - batchSize} remaining)
+        </span>
+      </button>
+    )}
+
     <GalleryLightbox />
+
+    {/* Embed full manifest as JSON for client-side progressive loading */}
+    <script
+      id="gallery-manifest"
+      type="application/json"
+      set:html={JSON.stringify(items)}
+    />
   </section>
 )}
+
+<script define:vars={{ batchSize }}>
+  document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById("gallery-grid");
+    const loadMoreBtn = document.getElementById("gallery-load-more");
+    const manifestEl = document.getElementById("gallery-manifest");
+    if (!grid || !manifestEl) return;
+
+    let allItems = [];
+    try {
+      allItems = JSON.parse(manifestEl.textContent || "[]");
+    } catch { return; }
+
+    let loaded = batchSize;
+
+    function createGalleryItem(item, index) {
+      const div = document.createElement("div");
+      div.className = "gallery-item" + (item.type === "video" ? " gallery-item--video" : "");
+      div.dataset.index = String(index);
+      div.dataset.src = item.src;
+      div.dataset.type = item.type;
+      div.dataset.description = item.description || "";
+      div.setAttribute("role", "button");
+      div.setAttribute("tabindex", "0");
+
+      if (item.type === "image") {
+        const img = document.createElement("img");
+        img.alt = item.description || item.src.split("/").pop() || "";
+        img.loading = "lazy";
+        // Use IntersectionObserver to defer actual src assignment
+        img.dataset.lazySrc = item.src;
+        img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%23222' width='400' height='300'/%3E%3C/svg%3E";
+        div.appendChild(img);
+      } else {
+        // For videos, show a placeholder instead of loading video metadata
+        const placeholder = document.createElement("div");
+        placeholder.className = "gallery-item__video-placeholder";
+        placeholder.innerHTML = `
+          <svg class="gallery-item__play-icon" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="23" fill="rgba(0,0,0,0.6)" stroke="rgba(255,255,255,0.8)" stroke-width="2"/>
+            <polygon points="19,14 19,34 36,24" fill="#fff"/>
+          </svg>
+        `;
+        div.appendChild(placeholder);
+
+        // Play overlay
+        const overlay = document.createElement("div");
+        overlay.className = "gallery-item__play-overlay";
+        overlay.innerHTML = `
+          <svg class="gallery-item__play-icon" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="23" fill="rgba(0,0,0,0.6)" stroke="rgba(255,255,255,0.8)" stroke-width="2"/>
+            <polygon points="19,14 19,34 36,24" fill="#fff"/>
+          </svg>
+        `;
+        div.appendChild(overlay);
+      }
+
+      if (item.description) {
+        const descOverlay = document.createElement("div");
+        descOverlay.className = "gallery-item__overlay";
+        const p = document.createElement("p");
+        p.className = "gallery-item__description";
+        p.textContent = item.description;
+        descOverlay.appendChild(p);
+        div.appendChild(descOverlay);
+      }
+
+      // Click/keyboard handlers
+      const open = () => {
+        div.dispatchEvent(
+          new CustomEvent("gallery:open", {
+            bubbles: true,
+            detail: { index, src: item.src, type: item.type, description: item.description || "" },
+          })
+        );
+      };
+      div.addEventListener("click", open);
+      div.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); }
+      });
+
+      return div;
+    }
+
+    function loadNextBatch() {
+      const end = Math.min(loaded + batchSize, allItems.length);
+      const fragment = document.createDocumentFragment();
+
+      for (let i = loaded; i < end; i++) {
+        fragment.appendChild(createGalleryItem(allItems[i], i));
+      }
+
+      grid.appendChild(fragment);
+      loaded = end;
+
+      // Observe newly added images
+      observeNewImages();
+
+      if (loaded >= allItems.length && loadMoreBtn) {
+        loadMoreBtn.style.display = "none";
+      } else if (loadMoreBtn) {
+        const remaining = allItems.length - loaded;
+        const label = loadMoreBtn.querySelector(".gallery-load-more__label");
+        if (label) label.textContent = `Load More (${remaining} remaining)`;
+      }
+    }
+
+    // IntersectionObserver for lazy image loading
+    const imgObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            if (img.dataset.lazySrc) {
+              img.src = img.dataset.lazySrc;
+              delete img.dataset.lazySrc;
+            }
+            imgObserver.unobserve(img);
+          }
+        }
+      },
+      { rootMargin: "200px" }
+    );
+
+    function observeNewImages() {
+      grid.querySelectorAll("img[data-lazy-src]").forEach((img) => {
+        imgObserver.observe(img);
+      });
+    }
+
+    // Also observe the initial server-rendered images
+    observeNewImages();
+
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener("click", loadNextBatch);
+    }
+  });
+</script>
 
 <style>
   .gallery-section {
@@ -119,5 +280,31 @@ if (fs.existsSync(manifestPath)) {
     .gallery-grid {
       column-count: 1;
     }
+  }
+
+  .gallery-load-more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1.5rem;
+    border: 2px solid var(--color-border);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.9375rem;
+    cursor: pointer;
+    transition:
+      border-color var(--transition),
+      color var(--transition),
+      background var(--transition);
+  }
+
+  .gallery-load-more:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    background: rgba(59, 130, 246, 0.05);
   }
 </style>

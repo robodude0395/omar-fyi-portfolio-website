@@ -88,16 +88,11 @@ const hasMore = items.length > batchSize;
     </div>
 
     {hasMore && (
-      <button
-        class="gallery-load-more"
-        id="gallery-load-more"
-        type="button"
-        aria-label={`Load more gallery items (${items.length - batchSize} remaining)`}
-      >
-        <span class="gallery-load-more__label">
-          Load More ({items.length - batchSize} remaining)
-        </span>
-      </button>
+      <div
+        class="gallery-sentinel"
+        id="gallery-sentinel"
+        aria-hidden="true"
+      />
     )}
 
     <GalleryLightbox />
@@ -114,7 +109,7 @@ const hasMore = items.length > batchSize;
 <script define:vars={{ batchSize }}>
   document.addEventListener("DOMContentLoaded", () => {
     const grid = document.getElementById("gallery-grid");
-    const loadMoreBtn = document.getElementById("gallery-load-more");
+    const sentinel = document.getElementById("gallery-sentinel");
     const manifestEl = document.getElementById("gallery-manifest");
     if (!grid || !manifestEl) return;
 
@@ -124,6 +119,7 @@ const hasMore = items.length > batchSize;
     } catch { return; }
 
     let loaded = batchSize;
+    let loading = false;
 
     function createGalleryItem(item, index) {
       const div = document.createElement("div");
@@ -139,12 +135,10 @@ const hasMore = items.length > batchSize;
         const img = document.createElement("img");
         img.alt = item.description || item.src.split("/").pop() || "";
         img.loading = "lazy";
-        // Use IntersectionObserver to defer actual src assignment
         img.dataset.lazySrc = item.src;
         img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%23222' width='400' height='300'/%3E%3C/svg%3E";
         div.appendChild(img);
       } else {
-        // Render actual video element — shows first frame, plays on hover
         const video = document.createElement("video");
         video.src = item.src;
         video.muted = true;
@@ -154,7 +148,6 @@ const hasMore = items.length > batchSize;
         video.className = "gallery-item__video";
         div.appendChild(video);
 
-        // Play overlay icon
         const overlay = document.createElement("div");
         overlay.className = "gallery-item__play-overlay";
         overlay.innerHTML = `
@@ -165,7 +158,6 @@ const hasMore = items.length > batchSize;
         `;
         div.appendChild(overlay);
 
-        // Hover play/pause
         div.addEventListener("mouseenter", () => { video.play().catch(() => {}); });
         div.addEventListener("mouseleave", () => { video.pause(); });
       }
@@ -180,7 +172,6 @@ const hasMore = items.length > batchSize;
         div.appendChild(descOverlay);
       }
 
-      // Click/keyboard handlers
       const open = () => {
         div.dispatchEvent(
           new CustomEvent("gallery:open", {
@@ -198,6 +189,9 @@ const hasMore = items.length > batchSize;
     }
 
     function loadNextBatch() {
+      if (loading || loaded >= allItems.length) return;
+      loading = true;
+
       const end = Math.min(loaded + batchSize, allItems.length);
       const fragment = document.createDocumentFragment();
 
@@ -207,20 +201,16 @@ const hasMore = items.length > batchSize;
 
       grid.appendChild(fragment);
       loaded = end;
-
-      // Observe newly added images
       observeNewImages();
+      loading = false;
 
-      if (loaded >= allItems.length && loadMoreBtn) {
-        loadMoreBtn.style.display = "none";
-      } else if (loadMoreBtn) {
-        const remaining = allItems.length - loaded;
-        const label = loadMoreBtn.querySelector(".gallery-load-more__label");
-        if (label) label.textContent = `Load More (${remaining} remaining)`;
+      if (loaded >= allItems.length && sentinel) {
+        scrollObserver.unobserve(sentinel);
+        sentinel.remove();
       }
     }
 
-    // IntersectionObserver for lazy image loading
+    // Lazy image loading
     const imgObserver = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -243,11 +233,20 @@ const hasMore = items.length > batchSize;
       });
     }
 
-    // Also observe the initial server-rendered images
     observeNewImages();
 
-    if (loadMoreBtn) {
-      loadMoreBtn.addEventListener("click", loadNextBatch);
+    // Infinite scroll — load next batch when sentinel enters viewport
+    const scrollObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          loadNextBatch();
+        }
+      },
+      { rootMargin: "400px" }
+    );
+
+    if (sentinel) {
+      scrollObserver.observe(sentinel);
     }
   });
 </script>
@@ -350,29 +349,9 @@ const hasMore = items.length > batchSize;
     }
   }
 
-  .gallery-load-more {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  /* Invisible sentinel element that triggers infinite scroll loading */
+  .gallery-sentinel {
+    height: 1px;
     width: 100%;
-    padding: 1rem;
-    margin-top: 1.5rem;
-    border: 2px solid var(--color-border);
-    border-radius: 8px;
-    background: transparent;
-    color: var(--color-text-muted);
-    font-family: var(--font-mono);
-    font-size: 0.9375rem;
-    cursor: pointer;
-    transition:
-      border-color var(--transition),
-      color var(--transition),
-      background var(--transition);
-  }
-
-  .gallery-load-more:hover {
-    border-color: var(--color-accent);
-    color: var(--color-accent);
-    background: rgba(59, 130, 246, 0.05);
   }
 </style>

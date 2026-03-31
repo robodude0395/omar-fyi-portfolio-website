@@ -1,0 +1,29 @@
+---
+interface Props {
+  /** Display title for the download */
+  title: string;
+  /** Path to the downloadable file (relative to public/) */
+  href: string;
+  /** Optional description shown below the title */
+  description?: string;
+  /** Optional thumbnail/icon image path */
+  thumbnail?: string;
+}
+
+const { title, href, description, thumbnail } = Astro.props;
+
+// Extract filename for display
+const filename = href.split("/").pop() ?? href;
+---
+
+<a class="download-card" href={href} download>
+  {thumbnail && (
+    <img class="download-card__thumb" src={thumbnail} alt="" loading="lazy" />
+  )}
+  <div class="download-card__content">
+    <span class="download-card__title">{title}</span>
+    {description && <span class="download-card__description">{description}</span>}
+    <span class="download-card__filename">{filename}</span>
+  </div>
+  <span class="download-card__icon" aria-hidden="true">⬇</span>
+</a>

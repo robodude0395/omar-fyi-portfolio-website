@@ -6,15 +6,20 @@ interface Props {
   href: string;
   /** Optional description shown below the title */
   description?: string;
+  /** Optional icon/thumbnail image path */
+  icon?: string;
 }
 
-const { title, href, description } = Astro.props;
+const { title, href, description, icon } = Astro.props;
 
 // Extract domain for display
 const domain = new URL(href).hostname.replace("www.", "");
 ---
 
 <a class="link-card" href={href} target="_blank" rel="noopener noreferrer">
+  {icon && (
+    <img class="link-card__icon" src={icon} alt="" loading="lazy" />
+  )}
   <div class="link-card__content">
     <span class="link-card__title">{title}</span>
     {description && <span class="link-card__description">{description}</span>}

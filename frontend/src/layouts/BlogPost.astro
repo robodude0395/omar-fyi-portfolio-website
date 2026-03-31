@@ -225,7 +225,6 @@ const formattedUpdatedDate = updatedDate?.toLocaleDateString("en-GB", {
   .post-content :global(.link-card) {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 1rem;
     padding: 1rem 1.25rem;
     border: 1px solid var(--color-border);
@@ -242,11 +241,21 @@ const formattedUpdatedDate = updatedDate?.toLocaleDateString("en-GB", {
     background: rgba(59, 130, 246, 0.05);
   }
 
+  .post-content :global(.link-card__icon) {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+    flex-shrink: 0;
+  }
+
   .post-content :global(.link-card__content) {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
     min-width: 0;
+    flex: 1;
   }
 
   .post-content :global(.link-card__title) {
@@ -277,6 +286,74 @@ const formattedUpdatedDate = updatedDate?.toLocaleDateString("en-GB", {
 
   .post-content :global(.link-card:hover .link-card__arrow) {
     color: var(--color-accent);
+  }
+
+  /* Download card styles */
+  .post-content :global(.download-card) {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-bg);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color var(--transition), background var(--transition);
+    margin: 0.75rem 0;
+  }
+
+  .post-content :global(.download-card:hover) {
+    border-color: var(--color-accent);
+    background: rgba(59, 130, 246, 0.05);
+  }
+
+  .post-content :global(.download-card__thumb) {
+    width: 80px;
+    align-self: stretch;
+    object-fit: contain;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+    flex-shrink: 0;
+  }
+
+  .post-content :global(.download-card__content) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .post-content :global(.download-card__title) {
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-accent);
+  }
+
+  .post-content :global(.download-card__description) {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+  }
+
+  .post-content :global(.download-card__filename) {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    opacity: 0.7;
+  }
+
+  .post-content :global(.download-card__icon) {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    transition: color var(--transition), transform var(--transition);
+  }
+
+  .post-content :global(.download-card:hover .download-card__icon) {
+    color: var(--color-accent);
+    transform: translateY(2px);
   }
 
   @media (max-width: 640px) {

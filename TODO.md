@@ -9,8 +9,6 @@
 + POST TUTORIAL VIDEO ON HOW TO SET UP THE AGENT FROM SCRATCH
 + (In progress) Home NAS I used to back up all my photos and stuff
 
-+DONE Post showing I got featured in MDX's front page!
-
 + How I made a basic home server NAS using a 6TB hard drive and a rpi 5.
 + How I wiressly connected to my old broken phone using adb tools and srcpy in order to rescue old picture and move them to my NAS.
 + Make a funny video/short to announce my amazing new portfolio site!

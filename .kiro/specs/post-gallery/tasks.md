@@ -100,17 +100,17 @@ Use this while developing to verify things work as you go:
 - [x] Videos render with a visible preview/poster frame
 - [x] Hovering an item with a description shows the overlay text
 - [x] Hovering an item without a description shows no overlay
-- [ ] Clicking an item opens the lightbox with the media full-size
-- [ ] Lightbox shows description below the media when available
-- [ ] Lightbox prev/next buttons navigate between items
-- [ ] Left/right arrow keys navigate in the lightbox
-- [ ] Escape key closes the lightbox
-- [ ] Clicking outside the media closes the lightbox
-- [ ] Tab key cycles focus within the lightbox (close, prev, next)
-- [ ] Gallery works on mobile (tap for description, tap again for lightbox)
-- [ ] Gallery looks correct in both dark and light color schemes
-- [ ] `npm run gallery:init -- folder-name` generates a valid `gallery.json`
-- [ ] Init script warns if `gallery.json` already exists
-- [ ] Init script errors if folder doesn't exist
-- [ ] Gallery with `gallery.json` shows items in manifest order
-- [ ] Gallery without `gallery.json` auto-discovers and sorts files alphabetically
+- [x] Clicking an item opens the lightbox with the media full-size
+- [x] Lightbox shows description below the media when available
+- [x] Lightbox prev/next buttons navigate between items
+- [x] Left/right arrow keys navigate in the lightbox
+- [x] Escape key closes the lightbox
+- [x] Clicking outside the media closes the lightbox
+- [x] Tab key cycles focus within the lightbox (close, prev, next)
+- [x] Gallery works on mobile (tap for description, tap again for lightbox)
+- [x] Gallery looks correct in both dark and light color schemes
+- [x] `npm run gallery:init -- folder-name` generates a valid `gallery.json`
+- [x] Init script warns if `gallery.json` already exists
+- [x] Init script errors if folder doesn't exist
+- [x] Gallery with `gallery.json` shows items in manifest order
+- [x] Gallery without `gallery.json` auto-discovers and sorts files alphabetically

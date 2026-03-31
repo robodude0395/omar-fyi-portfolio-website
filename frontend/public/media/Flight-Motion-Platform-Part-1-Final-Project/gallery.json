@@ -1,0 +1,90 @@
+[
+  {
+    "file": "20250224_153832.mp4",
+    "description": "Week 6 video of me trying out the platform. This was the very first stage where I managed to get my software to interface and control the platform."
+  },
+  {
+    "file": "20250224_165030.mp4",
+    "description": "Week 6 video of me shortly after filming the first one. IN this one I just managed to get control the platform USING the virtual plane from X-Plane 11."
+  },
+  {
+    "file": "20250318_154246.mp4",
+    "description": "This video shows initial muscle calibration testing. I think this was around week 4 or 5 because I was trying to figure out the load outlier on the chart."
+  },
+  {
+    "file": "20250319_141242.jpg",
+    "description": "Full shot of where I was working at most of the time. This was the university's basement where they keep all their cool toys."
+  },
+  {
+    "file": "20250319_141255.jpg",
+    "description": "Picture of the muscle calibration rig. The whole thing is held together with hopes and prayers yet it's still standing strong to this day."
+  },
+  {
+    "file": "20250319_183722.jpg",
+    "description": "Load cell attached to the top of the rig. This was used to measure the muscle's load at any given moment and ensure it remained consistent."
+  },
+  {
+    "file": "20250319_184530.mp4",
+    "description": "In this video I show how I managed to get all the pressure to distance values for all 4 loads tested on the rig."
+  },
+  {
+    "file": "20250320_151214.jpg",
+    "description": "Picture of sliding rail below calibration rig. On the left you can see a linear encoder which was used to measure the muscle's contraction at each pressure step."
+  },
+  {
+    "file": "20250320_195834.mp4",
+    "description": "Calibration data obtained AFTER fixing the jolting issue from a previous blog."
+  },
+  {
+    "file": "20250321_133308.mp4",
+    "description": "Week 9 video I took. This marked the final week where I would be gathering muscle data and move on with the project."
+  },
+  {
+    "file": "20250321_133424.mp4",
+    "description": "Me further explaining the final muscle calibration process."
+  },
+  {
+    "file": "20250328_121305.jpg",
+    "description": "Picture of the MDX rollercoaster ride. Whilst this was not the final wheelchair accessible platform my project used, it was a proof of concept that served it's function perfectly at this stage."
+  },
+  {
+    "file": "20250328_190842.mp4",
+    "description": "Week 10 progress where I finally implement my calibration data onto the actual platform."
+  },
+  {
+    "file": "20250328_201910.mp4",
+    "description": "Me manually controlling the platform using a dummy telemetry app."
+  },
+  {
+    "file": "20250408_172129.mp4",
+    "description": "This is a final validation video where I go over the muscle calibration data collected throughout the project. In essence I check that the pressure values from the data actually result in the contraction distance I expect."
+  },
+  {
+    "file": "20250410_115003.mp4",
+    "description": "Uncut video of my final year project presentation."
+  },
+  {
+    "file": "20250410_221928.jpg",
+    "description": "Picture of me celebrating my final day at uni at Mcdonnalds. The attire I am wearing was a promotional realistic Bee crown used in the minecraft movie promotion. I watched that movie in theathers later on. It was a fun time. Chicken Jockey."
+  },
+  {
+    "file": "20250429_133727.mp4",
+    "description": "Short video of the motion platform moving around in reaction to a demo flight on X-Plane 11."
+  },
+  {
+    "file": "crusty-flight-sim.png",
+    "description": "Picture of Crusty's Flight Simulator. This was a game I made a while ago well before the final year project. I've always had a big interest in game development as practical yet fun problem solving challenges (Stay tuned for posts about that)."
+  },
+  {
+    "file": "IMG-20250410-WA0034.jpg",
+    "description": "A picture I took with some colleagues on the final day in the basement where I worked on my project. The man on the right is Carlos, who was studying for a master’s in robotics, and the one in the middle is Arun, my classmate and WorldSkills Automation teammate."
+  },
+  {
+    "file": "IMG-20250410-WA0037.jpg",
+    "description": "Picture of me talking with Omer another fellow classmate."
+  },
+  {
+    "file": "VID_20250411_093635_439.mp4",
+    "description": "Instagram reel I made for funsies. I was rendering the presentation with captions and I noticed how I looked when sped up. The opportunity was too funny to not pass up."
+  }
+]

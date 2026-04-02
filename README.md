@@ -100,7 +100,21 @@ npm run preview
 
 ### Writing Blog Posts
 
-Create a new `.md` file in `frontend/src/content/blog/`:
+Use the scaffolding script to create a new post with all the frontmatter and imports pre-filled:
+
+```bash
+cd frontend
+./new-post.sh
+```
+
+It will prompt you for:
+- **Title** — also auto-generates a URL slug from it
+- **Format** — `md` or `mdx` (mdx includes component imports for `MediaEmbed`, `LinkCard`, and `DownloadCard`)
+- **Description**, **tags**, **draft status**, and optional **gallery folder**
+
+The file is created in `src/content/blog/` with today's date as `pubDate`.
+
+Alternatively, create a `.md` file manually in `frontend/src/content/blog/`:
 
 ```markdown
 ---
@@ -275,6 +289,20 @@ Blog posts can include an optional photo/video gallery appendix. To enable it:
    Each entry has a required `file` (filename) and an optional `description` (one-line caption). Only files listed in the manifest are displayed, in the order specified. If no `gallery.json` exists, all supported media files are auto-discovered and sorted alphabetically.
 
 Supported formats: `.jpg`, `.jpeg`, `.png`, `.webp`, `.gif`, `.mp4`, `.webm`.
+
+## Gallery Sorter GUI
+
+A graphical tool for building `gallery.json` manifests visually. Instead of guessing what each cryptically-named media file looks like, you can flip through images and videos in a tkinter GUI, accept or reject each one, and write descriptions as you go.
+
+```bash
+cd tools/gallery-sorter
+pip install -r requirements.txt
+python gallery_sorter.py [folder-name]
+```
+
+Run without a folder name to get a picker dialog. Keyboard shortcuts: `a` to accept, `r` to reject, arrow keys to navigate, `Ctrl+S` to save. Videos play inline with `Space` to pause.
+
+For full documentation see [`tools/gallery-sorter/README.md`](tools/gallery-sorter/README.md).
 
 ## License
 

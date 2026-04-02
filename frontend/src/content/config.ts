@@ -31,6 +31,8 @@ const blog = defineCollection({
     thumbnail: z.string().optional(),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
+    /** Mark a post as featured to highlight it on the homepage. */
+    featured: z.boolean().default(false),
     /**
      * Optional gallery folder name. When set, enables the gallery appendix.
      * Must match a directory name under frontend/public/media/.

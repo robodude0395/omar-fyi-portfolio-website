@@ -1,0 +1,141 @@
+---
+title: "An Astronaut Tried My Flight Simulator! - Final Year Project Part 3"
+description: "I thought my final year project was over after graduation. Instead, I came back as an engineer, helped build a wheelchair-accessible flight simulator, and showcased it at Europe's biggest airshow where Red Arrow pilots and astronaut Tim Peake tried it out."
+pubDate: 2025-07-18
+tags: ["university", " final-year-project", "RAeS"]
+thumbnail: "/media/Flight-Motion-Platform-Part-2-RIAT/Group Picture With Tim Peake.jpeg"
+heroImage: "/media/Flight-Motion-Platform-Part-2-RIAT/20250718_141919.jpg"
+draft: false
+gallery: "Flight-Motion-Platform-Part-2-RIAT"
+---
+import MediaEmbed from '../../components/MediaEmbed.astro';
+import LinkCard from '../../components/LinkCard.astro';
+import DownloadCard from '../../components/DownloadCard.astro';
+
+<LinkCard
+  title="Royal Aeronatical Society article detailing the success of Falcon 2 - The simulator my work was leading up to."
+  description=""
+  href="https://www.aerosociety.com/news/falcon-2-cleared-to-take-off/"
+  icon="/media/Flight-Motion-Platform-Part-2-RIAT/raes.png"
+/>
+
+You’d think that once I finished my final year project, I’d be done with it—right? I got the grade, I attended my graduation—surely that gave me every right to walk away from the flight motion platform after all that work.
+
+No.
+
+I wasn’t done with the project. In fact, the real journey hadn’t even properly begun by the time I finished my course.
+
+As I alluded to in my first part, the flight motion platform was actually part of a much larger initiative—one that Middlesex University was developing in collaboration with the Royal Aeronautical Society, Aerobility, Coventry University, and others.
+
+<MediaEmbed type="image" src="/media/Flight-Motion-Platform-Part-2-RIAT/sponsors.png">
+The project was called [falcon 2](https://www.aerosociety.com/careers-education/schools-outreach/the-falcon-2-programme/). A project between the RAeS and other companies to bring the experience of flight to disabled users.
+
+On the day of my final presentation, just moments before I was due to begin, my supervisor approached me. He asked—almost casually—whether I’d be willing to come back on Monday and continue working on the project.
+
+Not as a student.
+
+But as an engineer.
+
+I said yes.
+</MediaEmbed>
+
+Here are the highlights from that extra three-month journey—one that culminated in what was, quite possibly, one of the best days of my life.
+
+<MediaEmbed type="image" src="/media/Flight-Motion-Platform-Part-2-RIAT/20250711_120222.jpg">
+First and foremost was the platform itself. The platform I showed working on [part 1](https://www.omar-fyi.com/blog/university-final-project-flight-motion-platform-part-one/) was just to test out my muscle control software.
+The real project platform was the one shown on the right which didn't get built until like a month after my studies were over. This platform was wheelchair accesible, much bigger and intended to fit in a portable trailer.
+
+This platform also made use of the much bigger muscles that I obtained calibration data for during my thesis.
+</MediaEmbed>
+
+<MediaEmbed type="image" src="/media/Flight-Motion-Platform-Part-2-RIAT/20250626_115323.jpg">
+There were a lot of changes done to my codebase and the project itself. For instance we went through a few iterations for the chair. The one shown in the left
+was the initial mobility chair given to us by a sponsoring company. Although it was motorized and allowed for the user to elevate and move around, it was too heavy for the platform
+so we went with a simple wheelchair in the end.
+
+The platform’s key advantage was that it allowed wheelchair users to remain in their own chairs, simply by swapping out the default seat using quick-release hooks.
+</MediaEmbed>
+
+<MediaEmbed type="image" src="/media/Flight-Motion-Platform-Part-2-RIAT/20250711_115505.jpg">
+The pneumatic system that drove the platform was mounted to the wall of the trailer. It was properly equipped with a safety relay as well as a nice big red EStop button resting at the operator's desk in case anything went haywire.
+
+**Fun story**: The PLC that drove the platform was so old, we had to contact a robotics alumnus from years ago to help us transfer the code onto a new unit.
+That very student was the one who made Baxter the selfie robot! A popular MDX attraction.
+</MediaEmbed>
+
+<MediaEmbed type="image" src="/media/Flight-Motion-Platform-Part-2-RIAT/20250711_120241.jpg">
+The platform got mounted on a big trailer meant for convenient transport and storage. Behind the platform would be an operator's desk with all the neccesary equipment to safely operate the platform.
+
+If you notice, the picture on the left shows a big fan in front of the platform. This was because at the time we were assembling the thing in blistering June heat inside a tin box that had no AC installed yet.
+</MediaEmbed>
+
+<MediaEmbed type="image" src="/media/Flight-Motion-Platform-Part-2-RIAT/ANN.png">
+Another fairly major development during these three months was the use of an Artificial Neural Network (ANN) to improve muscle contraction distance accuracy.
+</MediaEmbed>
+
+Fluidic muscle control is a long story—fully detailed in my [report](/media/Flight-Motion-Platform-Part-1-Final-Project/138471_Omar_Maaouane_Veiga_Final_Year_Project_Report_3178027_1481399707.pdf)
+—but the key point is this: a fluidic muscle is a non-linear system. Non-linear systems are hard to control. To make matters more challenging, we didn’t have a sensor, so a closed-loop system wasn’t possible. The software simply had to send the correct pressure to the muscle—there was no feedback.
+
+My thesis initially addressed this using a lookup table based on rig calibration data. However, I wanted to push the actuator accuracy further, so I developed an alternative control method using an ANN.
+
+ANNs are well-suited for approximating outputs in non-linear systems. I trained a simple model on demo flight data, which resulted in a 71% improvement in accuracy.
+
+Despite this success, we ultimately stuck with the original look-up table approach. It was proven, reliable, and—given the stakes—we didn’t want to risk introducing uncertainty for the big day.
+
+<MediaEmbed type="image" src="/media/Flight-Motion-Platform-Part-2-RIAT/20250718_120039.jpg">
+And then came the big day!
+
+July 18th 2025.
+
+**The Royal International Air Tattoo**. Europe's biggest airshow where pilots and aircraft from every inch of the world meet up for several days filled with fun excitement and sheer awe.
+</MediaEmbed>
+
+<MediaEmbed type="image" src="/media/Flight-Motion-Platform-Part-2-RIAT/20250717_143938_cropped.jpg">
+After all our hard work working on the platform, the trailer, the software - our creation was ready to be showcased to hundreds of visitors.
+
+And man were they some amazing days! Where to even begin!?
+</MediaEmbed>
+
+<MediaEmbed type="image" src="/media/Flight-Motion-Platform-Part-2-RIAT/IMG-20250718-WA0027.jpg">
+First off the red arrows!
+
+Red arrow pilots - quite possible some of the coolest men to walk the earth came in - saw the platform I worked so hard on and said how legitimately impressed they were!
+
+I shook hands, we posed for a cool photo and to this day I still giggle at how fantastic that experience was.
+</MediaEmbed>
+
+<MediaEmbed type="image" src="/media/Flight-Motion-Platform-Part-2-RIAT/20250718_123011.jpg">
+Then came the aircraft showcase—and suddenly, everything felt real.
+
+I took countless photos, but no image can truly capture what it’s like to stand just metres away from these machines.
+</MediaEmbed>
+
+<MediaEmbed type="image" src="/media/Flight-Motion-Platform-Part-2-RIAT/20250718_123928.jpg">
+Seeing an aircraft on a screen is one thing; seeing it in person is something else entirely.
+And watching them fly? That’s on another level.
+It’s genuinely breathtaking to witness these engineering masterpieces roar past at dazzling speeds,
+then sweep back around with effortless precision.
+</MediaEmbed>
+
+<MediaEmbed type="image" src="/media/Flight-Motion-Platform-Part-2-RIAT/20250718_122046.jpg">
+In those moments, it really hit me—this is what all the work had been building towards.
+The project wasn’t just code, data, or hardware anymore; it had brought me here, to experience firsthand the very machines and principles I’d been striving to replicate.
+</MediaEmbed>
+
+<MediaEmbed type="video" src="/media/Flight-Motion-Platform-Part-2-RIAT/WhatsApp Video 2025-08-01 at 10.25.50.mp4">
+And to top it all off, just when the day couldn’t get any better, Tim Peake walked in.
+
+A real astronaut—someone who has lived and worked aboard the International Space Station—trying out our platform.
+
+And he didn’t just try it… he loved it.
+
+Hearing such positive feedback from someone with real spaceflight experience was incredible. It wasn’t just praise—it was validation that what we’ve built truly works.
+
+Seeing my work recognised at that level was an unforgettable moment.
+
+Check out the video on the right to see his review.
+</MediaEmbed>
+
+<MediaEmbed type="image" src="/media/Flight-Motion-Platform-Part-2-RIAT/Pyrotechnic show.jpeg">
+</MediaEmbed>
+What - a - day. Easily one of the best I have ever lived and one that truly reinforced my drive for doing what I love. To work on great projects and do great work that makes others happy.

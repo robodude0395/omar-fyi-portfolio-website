@@ -10,8 +10,15 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { title, description, pubDate, updatedDate, heroImage, tags } = post.data;
+const { title, description, pubDate, updatedDate, heroImage, heroFit, tags } = post.data;
 const hasGallery = !!post.data.gallery;
+
+// Normalise heroImage to always be an array for rendering
+const heroImages = heroImage
+  ? Array.isArray(heroImage) ? heroImage : [heroImage]
+  : [];
+// Use the first image for OG/meta tags
+const ogImage = heroImages[0];
 
 const formattedDate = pubDate.toLocaleDateString("en-GB", {
   year: "numeric",
@@ -26,7 +33,7 @@ const formattedUpdatedDate = updatedDate?.toLocaleDateString("en-GB", {
 });
 ---
 
-<BaseLayout title={`${title} — Omar Maaouane`} description={description} image={heroImage}>
+<BaseLayout title={`${title} — Omar Maaouane`} description={description} image={ogImage}>
   <article class="blog-post">
     <header class="post-header">
       <div class="post-meta">
@@ -48,14 +55,18 @@ const formattedUpdatedDate = updatedDate?.toLocaleDateString("en-GB", {
       )}
     </header>
 
-    {heroImage && (
-      <img
-        class="hero-image"
-        src={heroImage}
-        alt={`Hero image for ${title}`}
-        width="720"
-        height="360"
-      />
+    {heroImages.length > 0 && (
+      <div class:list={["hero-images", { "hero-images--multi": heroImages.length > 1 }]}>
+        {heroImages.map((src) => (
+          <img
+            class:list={["hero-image", { "hero-image--contain": heroFit === "contain" }]}
+            src={src}
+            alt={`Hero image for ${title}`}
+            width="720"
+            height="360"
+          />
+        ))}
+      </div>
     )}
 
     <div class="post-content">
@@ -127,12 +138,38 @@ const formattedUpdatedDate = updatedDate?.toLocaleDateString("en-GB", {
     border-radius: 4px;
   }
 
+  .hero-images {
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-images--multi {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+
+  .hero-images--multi .hero-image {
+    flex: 1 1 0;
+    min-width: 0;
+    max-height: 60vh;
+    object-fit: cover;
+  }
+
   .hero-image {
     width: 100%;
     height: auto;
     border-radius: 8px;
-    margin-bottom: 2.5rem;
     border: 1px solid var(--color-border);
+  }
+
+  .hero-image--contain {
+    max-height: 60vh;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .post-content {

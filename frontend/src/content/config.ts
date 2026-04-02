@@ -7,7 +7,18 @@ const blog = defineCollection({
     description: z.string(),
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
-    heroImage: z.string().optional(),
+    /**
+     * Hero image(s) displayed at the top of the post.
+     * Pass a single string for one image, or an array of strings
+     * to display multiple images side by side (great for portraits).
+     */
+    heroImage: z.union([z.string(), z.array(z.string())]).optional(),
+    /**
+     * Controls hero image sizing. Set to "contain" to cap the height
+     * of portrait/tall images so they don't dominate the viewport.
+     * Default behaviour (omitted or "cover") is unchanged.
+     */
+    heroFit: z.enum(["cover", "contain"]).default("cover"),
     /**
      * Thumbnail image displayed in the blog listing page.
      * Should be a path relative to the `public/` directory (e.g. "/media/my-thumb.jpg").

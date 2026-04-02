@@ -1,0 +1,90 @@
+---
+title: "Making a NAS personal remote storage from an external drive and rpi 5"
+description: "A quick NAS server I made in order to easily keep all my media and content in one place."
+pubDate: 2026-03-23
+tags: ["personal", "diy"]
+thumbnail: "/media/rpi-NAS/rpi-nas.png"
+draft: false
+---
+
+import MediaEmbed from '../../components/MediaEmbed.astro';
+import LinkCard from '../../components/LinkCard.astro';
+import DownloadCard from '../../components/DownloadCard.astro';
+
+<MediaEmbed type="image" src="/media/rpi-NAS/rpi-nas.png">
+So when I was working on this portfolio I had a LOT of content to port over. Like 3-4 years worth of videos images and fun memories I made along the way.
+
+A lot of this content resided in dead phones and hard drives that were inherently difficult to access.
+
+Now I could simply access that content by plugging in all these devices and manually going through all the files. However, cables are very uncomfortable to wield and my desk is crowded enough as is.
+
+So what if I could just access all files but without having to plug bulky physical devices to my laptop?
+
+Well... that's what my quick guide will detail in this post. How to make your own remote. storage solution WITHOUT handing over your data to our tech overlords at a monthly fee.
+</MediaEmbed>
+
+# What I did
+
+The setup is dead simple. Plug the USB drive into the Pi, mount it, share it over the network with Samba. That's it.
+
+## Mount the drive
+
+Plug in the drive and find it:
+
+```bash
+lsblk
+sudo blkid /dev/sda1
+```
+
+Mount it:
+
+```bash
+sudo mkdir -p /mnt/nas
+sudo mount -t ntfs-3g -o uid=pi,gid=pi,umask=002 /dev/sda1 /mnt/nas
+```
+
+To make it stick across reboots, add this to `/etc/fstab` (swap in your UUID from `blkid`):
+
+```
+UUID=B6BE42BDBE427641 /mnt/nas ntfs-3g defaults,uid=pi,gid=pi,umask=002,nofail 0 0
+```
+
+## Share it with Samba
+
+```bash
+sudo apt update
+sudo apt install samba
+```
+
+Add this to the bottom of `/etc/samba/smb.conf`:
+
+```ini
+[NAS]
+   path = /mnt/nas
+   browseable = yes
+   read only = no
+   guest ok = no
+   valid users = pi
+   force user = pi
+```
+
+Set a password and restart:
+
+```bash
+sudo smbpasswd -a pi
+sudo systemctl restart smbd
+```
+
+## Access it
+
+From any device on the network:
+
+- Windows: `\\<raspberry_pi_ip>\NAS`
+- macOS: Finder → Go → Connect to Server → `smb://<raspberry_pi_ip>/NAS`
+- Linux: `smb://<raspberry_pi_ip>/NAS`
+
+That's the whole thing. No formatting the drive, no data loss, just plug in and go.
+
+## Bonus: access it from anywhere
+
+And if you ever find yourself on a beach in the Bahamas desperately needing to access your cat pictures while your drive is sitting at home collecting dust — just set up [Tailscale](https://tailscale.com/). It creates a secure tunnel to your home network, so your NAS works as if you never left the house. Your cats will thank you.

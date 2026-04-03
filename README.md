@@ -304,6 +304,18 @@ Run without a folder name to get a picker dialog. Keyboard shortcuts: `a` to acc
 
 For full documentation see [`tools/gallery-sorter/README.md`](tools/gallery-sorter/README.md).
 
+## Hero Gallery Picker
+
+A quick GUI for managing the photo gallery on the [About page](frontend/src/pages/about.astro). It reads the current gallery images from `about.astro`, lets you browse `public/media/` to add new ones, reorder or remove them, edit alt text, and writes the changes back to the file.
+
+```bash
+cd tools/hero-gallery-picker
+pip install -r requirements.txt
+python hero_gallery_picker.py
+```
+
+Select images via the file dialog, drag them into the order you want with Move Up / Move Down, fill in alt text, and hit "Save to about.astro".
+
 ## License
 
 Content is © Omar Maaouane Veiga. Code is available for reference.

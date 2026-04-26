@@ -64,8 +64,7 @@ terraform/
 - Location: `frontend/src/content/blog/*.md`
 - Schema: Defined in `frontend/src/content/config.ts`
 - Required frontmatter: `title`, `description`, `pubDate`
-- Optional frontmatter: `updatedDate`, `heroImage`, `thumbnail`, `tags`, `draft`
-- Draft posts (`draft: true`) are hidden from listings
+- Optional frontmatter: `updatedDate`, `heroImage`, `thumbnail`
 
 ### Static Assets
 

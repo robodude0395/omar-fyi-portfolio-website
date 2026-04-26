@@ -13,11 +13,9 @@ This is a personal portfolio and blog website for Omar Maaouane Veiga, hosted at
 - Static site generation for fast page loads
 - Blog with markdown-based content management
 - Content collections with schema validation
-- Draft mode for work-in-progress posts
 - Custom 404 page
 - SEO-optimized with sitemap generation
 - Syntax highlighting for code blocks
-- Tag-based post organization
 
 ## Design Philosophy
 

@@ -28,23 +28,6 @@ fi
 # Description
 read -p "Description: " DESCRIPTION
 
-# Tags (comma-separated)
-read -p "Tags (comma-separated): " TAGS_RAW
-if [ -n "$TAGS_RAW" ]; then
-  TAGS=$(echo "$TAGS_RAW" | sed 's/,/", "/g' | sed 's/^ */"/;s/ *$/"/;s/^/[/;s/$/]/')
-else
-  TAGS="[]"
-fi
-
-# Draft
-read -p "Draft? (y/n) [y]: " DRAFT_INPUT
-DRAFT_INPUT=${DRAFT_INPUT:-y}
-if [[ "$DRAFT_INPUT" == "y" || "$DRAFT_INPUT" == "Y" ]]; then
-  DRAFT="true"
-else
-  DRAFT="false"
-fi
-
 # Gallery
 read -p "Gallery folder (leave empty for none): " GALLERY
 
@@ -72,10 +55,8 @@ cat > "$FILE" << EOF
 title: "$TITLE"
 description: "$DESCRIPTION"
 pubDate: $PUB_DATE
-tags: $TAGS
 thumbnail: ""
 heroImage: ""
-draft: $DRAFT
 $GALLERY_LINE
 ---
 EOF

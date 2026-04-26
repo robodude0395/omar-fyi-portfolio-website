@@ -4,6 +4,7 @@
 + (In progress) A rpi webcam livestream server (Which I might implement later on the rpi tank project).
 + (In progress) An altoids/mint box arcade game handheld made with upcycled vape batteries.
 + (In progress) A fancypants training model for f1 cars that is trained from dozens of hours of f1 driver telemetry data. Something like Max Verstap-bot.
++ (Idea) An general AI image synthesis tool for YOLO Computer Vision training. Similar to that time a friend of mine made a super accurate UNO card detector synthesis tool.
 + A whole shopping website made in AWS workshop #2.
 + (In progress) A local LLM coding agent I can connect through a vs code extension and will act on my workspace just like Claude but instead using an LLM I am hosting on a remote machine.
 + POST TUTORIAL VIDEO ON HOW TO SET UP THE AGENT FROM SCRATCH
@@ -45,6 +46,7 @@
 + Graduation day
 +Test video for Climbing pig
 +RIAT day with pic dump
++MDX snowman I did like back in 2022
 
 # Games
 + Soulslike game

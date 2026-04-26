@@ -2,10 +2,8 @@
 title: "Building This Site: Astro, AWS, and Terraform"
 description: "A deep dive into the tech stack behind this site — static generation with Astro, hosting on S3 and CloudFront, infrastructure as code with Terraform, and CI/CD with GitHub Actions."
 pubDate: 2026-02-18
-tags: ["astro", "aws", "terraform", "infrastructure", "devops"]
 thumbnail: "/media/architecture_diagram.png"
 heroImage: "/media/architecture_diagram.png"
-draft: false
 ---
 
 Every developer blog needs a post about how it was built. So here's mine.
@@ -60,9 +58,7 @@ const blog = defineCollection({
     title: z.string(),
     description: z.string(),
     pubDate: z.coerce.date(),
-    thumbnail: z.string().optional(), // listing page thumbnail
-    tags: z.array(z.string()).default([]),
-    draft: z.boolean().default(false),
+    thumbnail: z.string().optional(),
   }),
 });
 ```

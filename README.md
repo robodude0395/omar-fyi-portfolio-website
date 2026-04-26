@@ -110,7 +110,7 @@ cd frontend
 It will prompt you for:
 - **Title** — also auto-generates a URL slug from it
 - **Format** — `md` or `mdx` (mdx includes component imports for `MediaEmbed`, `LinkCard`, and `DownloadCard`)
-- **Description**, **tags**, **draft status**, and optional **gallery folder**
+- **Description** and optional **gallery folder**
 
 The file is created in `src/content/blog/` with today's date as `pubDate`.
 
@@ -121,14 +121,10 @@ Alternatively, create a `.md` file manually in `frontend/src/content/blog/`:
 title: "Your Post Title"
 description: "A brief description for listings and SEO."
 pubDate: 2026-03-01
-tags: ["topic", "another-topic"]
-draft: false
 ---
 
 Your content here. Full Markdown support with syntax highlighting.
 ```
-
-Set `draft: true` to hide a post from listings while you work on it.
 
 ## Infrastructure Setup
 

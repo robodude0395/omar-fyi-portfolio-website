@@ -1,5 +1,5 @@
 # Posts to make:
-+ (Fun idea) A swearing LLM robot BMO like robot with a british accent! Just like that one BMO robot it'll listen and respond with swearing included. It could even detect certain parts on your speech and generate a sweary response back.
++ (Fun idea) A swearing LLM robot BMO like robot with a british accent! Just like that one BMO robot it'll listen and respond with swearing included. It could even detect certain parts on your speech and generate a sweary response back. I could write some type of MCP tool to give the LLM or AI the ability to execute certain tasks on command or based on the LLM output. For example if I ask the llm to shake it's hands or spin around, it'll invoke that action and it'll show in the robot.
 + (Fun idea) Adding browser mic for backwards talk and voice stream allowing me to make a remote calling robot.
 + (In progress) A rpi webcam livestream server (Which I might implement later on the rpi tank project).
 + (In progress) An altoids/mint box arcade game handheld made with upcycled vape batteries.

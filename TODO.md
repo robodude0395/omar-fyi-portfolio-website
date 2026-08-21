@@ -1,4 +1,5 @@
 # Posts to make:
++ Updated rpi-pokedex that also shows pokemon weaknesses, types, stats and has a much better UX than it currently does.
 + A tacky party accesory that must be wearable and do the following: Have vu-meter fft like lighiting that reacts to outside noise (it should be controller by an stm32) and have a bluetooth/cable aux speaker system for jamming out some choonz.
 + (Fun idea) A swearing LLM robot BMO like robot with a british accent! Just like that one BMO robot it'll listen and respond with swearing included. It could even detect certain parts on your speech and generate a sweary response back. I could write some type of MCP tool to give the LLM or AI the ability to execute certain tasks on command or based on the LLM output. For example if I ask the llm to shake it's hands or spin around, it'll invoke that action and it'll show in the robot.
 + (Fun idea) Adding browser mic for backwards talk and voice stream allowing me to make a remote calling robot.

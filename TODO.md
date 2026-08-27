@@ -1,4 +1,5 @@
 # Posts to make:
++ An rpi pico addon to support connectivity with a bluetooth hc05 module. This will enable the ds to connect to bluetooth peripherals such as a mouse or keyboard
 + For the 1000 IG follower promo reel I'll make a IG sub counter using the RPI display I already have.
 + A 3ds vnc server app that allows the user to connect to any rpi within the network. There should be two options for control, one for regular ssh cli and a gui interface through vnc server. Controls such as keyboard and mouse will be emulated. (As a joke mention that I was thinking of using that bluetooth pokemon keyboard that was exclusive to europe).
 + Updated rpi-pokedex that also shows pokemon weaknesses, types, stats and has a much better UX than it currently does.

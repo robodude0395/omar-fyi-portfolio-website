@@ -1,4 +1,5 @@
 # Posts to make:
++A program/excel extension that allows for network messaging between two users. The sole reason I am making this is because in Nelly's 2002 music video 'Dilema', exactly at minute 3:15 when Kelly Rowland is checking out her messages, she is CHECKING THEM IN THE EXCEL APP OF HER NOKIA 9210!!! Therefore it'd be hilarious to actually make some addon to excel that allows people get communicate with it as if it was a chatting app.
 + An ds pico cart addon to support connectivity with a bluetooth hc05 module. This will enable the ds to connect to bluetooth peripherals such as a mouse or keyboard
 + For the 1000 IG follower promo reel I'll make a IG sub counter using the RPI display I already have.
 + A 3ds vnc server app that allows the user to connect to any rpi within the network. There should be two options for control, one for regular ssh cli and a gui interface through vnc server. Controls such as keyboard and mouse will be emulated. (As a joke mention that I was thinking of using that bluetooth pokemon keyboard that was exclusive to europe).

@@ -1,4 +1,5 @@
 # Posts to make:
++ An antweight robot building game meant to simulate and work like sumo antweight competitions.
 + A tool that allows me to split tracks into stems containing melody, bass, chorus, etc so I can drag and drop them into a system that plays the cong using nothing but discarted appliances. Essentially having my own go at making a floppotron.
 + (Done) A program/excel extension that allows for network messaging between two users. The sole reason I am making this is because in Nelly's 2002 music video 'Dilema', exactly at minute 3:15 when Kelly Rowland is checking out her messages, she is CHECKING THEM IN THE EXCEL APP OF HER NOKIA 9210!!! Therefore it'd be hilarious to actually make some addon to excel that allows people get communicate with it as if it was a chatting app.
 + An ds pico cart addon to support connectivity with a bluetooth hc05 module. This will enable the ds to connect to bluetooth peripherals such as a mouse or keyboard
